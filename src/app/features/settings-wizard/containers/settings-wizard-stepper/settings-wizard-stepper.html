@@ -3,5 +3,9 @@
     <cdk-step>
       <app-theme-selection (optionEmit)="themeOption.set($event)" />
     </cdk-step>
+
+    <cdk-step>
+      <app-font-size (fontSizeEmit)="fontSizeOption.set($event)" />
+    </cdk-step>
   </app-custom-stepper>
 </app-wrapper-card>

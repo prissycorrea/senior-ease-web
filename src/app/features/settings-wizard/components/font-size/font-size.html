@@ -1,0 +1,22 @@
+<div class="text-center mb-5">
+  <h1>Este tamanho de letra está bom?</h1>
+  <p>Ajuste para que sua leitura seja confortável.</p>
+</div>
+
+<div class="d-flex gap-3">
+  <div class="font-size__card">
+    <p class="text-center" [style.font-size.px]="fontSize()">
+      Com o SeniorEase, organizar seu dia a dia ficou mais simples e acessível.
+    </p>
+  </div>
+  <div class="font-size__actions">
+    <button (click)="decreaseFontSize(); fontSizeEmit.emit(fontSize())">
+      <i class="fa-solid fa-minus"></i>
+      Diminuir
+    </button>
+    <button (click)="increaseFontSize(); fontSizeEmit.emit(fontSize())">
+      <i class="fa-solid fa-plus"></i>
+      Aumentar
+    </button>
+  </div>
+</div>
