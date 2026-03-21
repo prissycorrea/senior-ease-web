@@ -1,0 +1,40 @@
+<div class="theme-selection__title">
+  <h1>Conforto visual</h1>
+  <p>Qual destas opções é melhor para seus olhos?</p>
+</div>
+
+<div class="theme-selection__options">
+  @for (option of themes; track option.id) {
+    <label
+      class="theme-selection__card"
+      [class.active]="selectedTheme() === option.id"
+      [class.dark-theme]="option.id === 'dark-theme'"
+    >
+      <div class="theme-selection__header">
+        <input
+          type="radio"
+          name="theme"
+          [value]="option.id"
+          [checked]="selectedTheme() === option.id"
+          (change)="onSelect(option.id); optionEmit.emit(option.id)"
+        />
+        <span class="theme-selection__header-label">{{ option.label }}</span>
+        <div class="custom-check"></div>
+      </div>
+
+      <div class="theme-selection__content">
+        <div class="description"></div>
+
+        <div class="d-flex w-100 gap-3 justify-content-center align-items-center">
+          <i class="fa-regular fa-circle-user"></i>
+          <div class="theme-selection__content">
+            <div class="description"></div>
+            <div class="description"></div>
+          </div>
+        </div>
+
+        <div class="description pb-4">{{ option.desc }}</div>
+      </div>
+    </label>
+  }
+</div>
