@@ -1,5 +1,6 @@
 import { CdkStep } from '@angular/cdk/stepper';
-import { Component, effect, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { CustomStepper } from '../../../../shared/components/custom-stepper/custom-stepper';
 import { WrapperCard } from '../../../../shared/components/wrapper-card/wrapper-card';
 import { FontSize } from '../../components/font-size/font-size';
@@ -12,13 +13,20 @@ import { ThemeSelection } from '../../components/theme-selection/theme-selection
   styleUrl: './settings-wizard-stepper.scss',
 })
 export class SettingsWizardStepper {
-  themeOption = signal<string>('light-theme');
-  fontSizeOption = signal<number>(16);
+  private _router = inject(Router);
+
+  public themeOption = signal<string>('light-theme');
+  public fontSizeOption = signal<number>(16);
+  public finalizeStep = signal<boolean>(false);
 
   constructor() {
     effect(() => {
       localStorage.setItem('theme', this.themeOption());
       localStorage.setItem('fontSize', this.fontSizeOption().toString());
+    });
+
+    effect(() => {
+      if (this.finalizeStep()) this._router.navigate(['autenticacao']);
     });
   }
 }

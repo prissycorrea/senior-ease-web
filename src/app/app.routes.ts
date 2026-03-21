@@ -5,14 +5,18 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'setup', // Ou uma lógica de redirecionamento dinâmico
+    redirectTo: 'configuracao', // Ou uma lógica de redirecionamento dinâmico
   },
   {
-    path: 'setup',
+    path: 'configuracao',
     loadComponent: () =>
       import('./features/settings-wizard/containers/settings-wizard-stepper/settings-wizard-stepper').then(
-        (m) => m.SettingsWizardStepper,
+        (c) => c.SettingsWizardStepper,
       ),
+  },
+  {
+    path: 'autenticacao',
+    loadComponent: () => import('./features/auth/containers/auth').then((c) => c.Auth),
   },
   {
     path: '**',

@@ -1,5 +1,5 @@
 <app-wrapper-card>
-  <app-custom-stepper>
+  <app-custom-stepper (finalizeEmit)="finalizeStep.set($event)">
     <cdk-step>
       <app-theme-selection (optionEmit)="themeOption.set($event)" />
     </cdk-step>

@@ -13,8 +13,19 @@ import { Component, output } from '@angular/core';
 export class CustomStepper extends CdkStepper {
   public nextEmit = output<number>();
   public previousEmit = output<number>();
+  public finalizeEmit = output<boolean>();
 
   onClick(index: number): void {
     this.selectedIndex = index;
+  }
+
+  override next(): void {
+    const isLastStep = this.selectedIndex === this.steps.length - 1;
+
+    if (isLastStep) {
+      this.finalizeEmit.emit(true);
+    } else {
+      super.next();
+    }
   }
 }
