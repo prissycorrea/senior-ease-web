@@ -1,0 +1,43 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .stepper {
+    &-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      .step {
+        &-bar {
+          width: 8px;
+          height: 8px;
+          background-color: var(--primary-color-light);
+          border-radius: 20px;
+          transition: 0.3s ease-in-out;
+          &.active {
+            width: 45px;
+            background-color: var(--primary-color);
+          }
+        }
+      }
+    }
+    &-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+  }
+  .step {
+    &-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      padding-block: 30px;
+    }
+  }
+}

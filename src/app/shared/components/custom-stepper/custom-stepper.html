@@ -1,0 +1,19 @@
+<div class="stepper-container">
+  @for (step of steps; track $index) {
+    <div class="step-bar" [class.active]="$index === selectedIndex" (click)="onClick($index)"></div>
+  }
+</div>
+
+<div class="step-content">
+  <ng-container [ngTemplateOutlet]="selected?.content || null"></ng-container>
+</div>
+
+<div class="stepper-actions">
+  @if (selectedIndex > 0) {
+    <button data-type="secondary" (click)="previous(); previousEmit.emit(selectedIndex)">Voltar</button>
+  }
+
+  <button (click)="next(); nextEmit.emit(selectedIndex)" class="btn-next">
+    Continuar
+  </button>
+</div>
