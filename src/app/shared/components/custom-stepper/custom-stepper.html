@@ -1,6 +1,11 @@
 <div class="stepper-container">
   @for (step of steps; track $index) {
-    <div class="step-bar" [class.active]="$index === selectedIndex" (click)="onClick($index)"></div>
+    <div
+      class="step-bar"
+      [class.active]="$index === selectedIndex"
+      [class.disabled]="isLinear() && $index > selectedIndex"
+      (click)="!isLinear() || $index <= selectedIndex ? onClick($index) : null"
+    ></div>
   }
 </div>
 
