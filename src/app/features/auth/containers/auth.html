@@ -1,1 +1,12 @@
-<app-wrapper-card [noHeader]="true"> teste </app-wrapper-card>
+<app-wrapper-card [noHeader]="true">
+  <div class="d-flex flex-column gap-5 align-items-center w-50">
+    <figure class="d-flex align-items-center justify-content-center">
+      <img class="w-50" src="images/logo-vertical.png" alt="Logo vertical da SeniorEase" />
+    </figure>
+    <div class="d-flex flex-column gap-3 align-items-center">
+      <app-button label="Criar minha conta" class="w-100" />
+      <app-button label="Já tenho uma conta" class="w-100" />
+    </div>
+    <a href="#" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Preciso de ajuda</a>
+  </div>
+</app-wrapper-card>
