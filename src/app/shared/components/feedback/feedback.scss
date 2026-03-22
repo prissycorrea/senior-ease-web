@@ -1,0 +1,17 @@
+.feedback {
+  &__type {
+    font-size: 150px;
+    &[data-type='success'] {
+      color: var(--success-color);
+    }
+    &[data-type='warning'] {
+      color: var(--warning-color);
+    }
+    &[data-type='error'] {
+      color: var(--error-color);
+    }
+    &[data-type='info'] {
+      color: var(--info-color);
+    }
+  }
+}

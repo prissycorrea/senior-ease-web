@@ -19,6 +19,10 @@ export const routes: Routes = [
     loadChildren: () => import('./features/auth/auth.routes').then((m) => m.AUTH_ROUTES),
   },
   {
+    path: 'feedback',
+    loadComponent: () => import('./shared/components/feedback/feedback').then((c) => c.Feedback),
+  },
+  {
     path: '**',
     redirectTo: 'auth',
   },

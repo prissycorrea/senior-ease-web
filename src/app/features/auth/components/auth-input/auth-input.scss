@@ -2,12 +2,12 @@
   // .ng-p
   &.ng-dirty.ng-touched.ng-invalid {
     input {
-      border-color: var(--danger);
+      border-color: var(--error-color);
     }
   }
   &.ng-dirty.ng-touched.ng-valid {
     input {
-      border-color: var(--success);
+      border-color: var(--success-color);
     }
   }
 }
