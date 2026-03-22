@@ -15,7 +15,8 @@
     "target": "ES2022",
     "module": "preserve",
     "paths": {
-      "@assets/*": ["./src/assets/*"]
+      "@assets/*": ["./src/assets/*"],
+      "@bootstrap/*": ["./node_modules/bootstrap/*"]
     }
   },
   "angularCompilerOptions": {

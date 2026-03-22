@@ -1,8 +1,9 @@
 import { Component, output, signal } from '@angular/core';
+import { Button } from "../../../../shared/components/button/button";
 
 @Component({
   selector: 'app-font-size',
-  imports: [],
+  imports: [Button],
   templateUrl: './font-size.html',
   styleUrl: './font-size.scss',
 })

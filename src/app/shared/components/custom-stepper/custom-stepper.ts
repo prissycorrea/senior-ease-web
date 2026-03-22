@@ -2,10 +2,11 @@
 import { CdkStepper, CdkStepperModule } from '@angular/cdk/stepper';
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, output } from '@angular/core';
+import { Button } from '../button/button';
 
 @Component({
   selector: 'app-custom-stepper',
-  imports: [CdkStepperModule, NgTemplateOutlet],
+  imports: [CdkStepperModule, NgTemplateOutlet, Button],
   templateUrl: './custom-stepper.html',
   styleUrl: './custom-stepper.scss',
   providers: [{ provide: CdkStepper, useExisting: CustomStepper }],

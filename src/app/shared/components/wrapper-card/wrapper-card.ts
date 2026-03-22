@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { Header } from '../../../core/header/header';
 
 @Component({
@@ -8,5 +8,5 @@ import { Header } from '../../../core/header/header';
   styleUrl: './wrapper-card.scss',
 })
 export class WrapperCard {
-
+  public noHeader = input<boolean>(false);
 }

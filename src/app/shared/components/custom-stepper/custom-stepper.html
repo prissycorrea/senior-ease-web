@@ -10,10 +10,12 @@
 
 <div class="stepper-actions">
   @if (selectedIndex > 0) {
-    <button data-type="secondary" (click)="previous(); previousEmit.emit(selectedIndex)">Voltar</button>
+    <app-button
+      label="Voltar"
+      type="secondary"
+      (click)="previous(); previousEmit.emit(selectedIndex)"
+    />
   }
 
-  <button (click)="next()" class="btn-next">
-    Continuar
-  </button>
+  <app-button label="Continuar" (click)="next()" class="btn-next" />
 </div>

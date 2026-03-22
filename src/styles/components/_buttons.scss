@@ -11,21 +11,27 @@ button {
   padding-inline: 95px;
   font-size: 24px;
   cursor: pointer;
-  transition: .3s ease-in-out;
-  &:hover {
+  transition: 0.3s ease-in-out;
+  &:not(:disabled):hover {
     background-color: var(--primary-color-hover);
   }
   &:disabled {
     background-color: var(--primary-color-light);
     cursor: not-allowed;
   }
-  &[data-type="secondary"] {
+  &[data-type='secondary'] {
     background-color: var(--bg-color);
     color: var(--primary-color);
     border: 1px solid var(--primary-color);
-    &:hover {
+    &:not(:disabled):hover {
       background-color: var(--primary-color-hover);
       color: var(--bg-color);
+    }
+    &:disabled {
+      cursor: not-allowed;
+      border: none;
+      background-color: #eee;
+      color: var(--primary-color-light);
     }
   }
 }
