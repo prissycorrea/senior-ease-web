@@ -1,0 +1,32 @@
+name: CI - Continuous Integration
+
+on:
+  pull_request:
+
+jobs:
+  build-and-test:
+    name: Pipeline test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v2
+        with:
+          chrome-version: stable
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test -- --no-watch --browsers=ChromeHeadless
+
+      - name: Build project
+        run: npm run build
