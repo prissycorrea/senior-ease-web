@@ -1,0 +1,53 @@
+name: CD - Continuous Delivery
+
+on:
+  push:
+    branches:
+      - main
+      - development
+
+jobs:
+  build-and-test:
+    name: Pipeline deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v2
+        with:
+          chrome-version: stable
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test -- --no-watch --browsers=ChromeHeadless
+
+      - name: Build project
+        run: npm run build
+
+  deploy-development:
+    if: github.ref == 'refs/heads/development'
+    runs-on: ubuntu-latest
+    environment: Development
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy Vercel Development
+        run: npx vercel --token ${{ secrets.VERCEL_TOKEN }} --yes
+
+  deploy-production:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: Production
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy Vercel Production
+        run: npx vercel --prod --token ${{ secrets.VERCEL_TOKEN }} --yes
