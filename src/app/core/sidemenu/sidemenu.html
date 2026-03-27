@@ -1,0 +1,35 @@
+<div class="sidemenu">
+  <div class="sidemenu__menu">
+    <figure class="sidemenu__logo">
+      <img src="images/logo.png" alt="Logo da SeniorEase" />
+    </figure>
+    <nav class="sidemenu__nav">
+      <ul>
+        <li>
+          <a routerLink="/inicio" routerLinkActive="active">
+            <i class="fa-solid fa-house"></i>
+            <span>Início</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/agenda" routerLinkActive="active">
+            <i class="fa-solid fa-gear"></i>
+            <span>Agenda</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/ajustes" routerLinkActive="active">
+            <i class="fa-solid fa-question"></i>
+            <span>Ajustes</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <div class="sidemenu__actions">
+      <app-button label="Sair da conta" class="w-100" ></app-button>
+    </div>
+  </div>
+  <div class="sidemenu__content">
+    <router-outlet />
+  </div>
+</div>

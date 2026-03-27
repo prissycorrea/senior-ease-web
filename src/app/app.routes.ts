@@ -4,8 +4,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
-    redirectTo: 'configuracao', // Ou uma lógica de redirecionamento dinâmico
+    loadChildren: () => import('./core/sidemenu/sidemenu.routes').then((r) => r.SIDEMENU_ROUTES),
   },
   {
     path: 'configuracao',
