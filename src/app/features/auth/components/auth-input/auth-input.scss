@@ -1,0 +1,13 @@
+:host {
+  // .ng-p
+  &.ng-dirty.ng-touched.ng-invalid {
+    input {
+      border-color: var(--error-color);
+    }
+  }
+  &.ng-dirty.ng-touched.ng-valid {
+    input {
+      border-color: var(--success-color);
+    }
+  }
+}

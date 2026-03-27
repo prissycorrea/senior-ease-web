@@ -16,7 +16,11 @@ export const routes: Routes = [
   },
   {
     path: 'autenticacao',
-    loadComponent: () => import('./features/auth/containers/auth').then((c) => c.Auth),
+    loadChildren: () => import('./features/auth/auth.routes').then((m) => m.AUTH_ROUTES),
+  },
+  {
+    path: 'feedback',
+    loadComponent: () => import('./shared/components/feedback/feedback').then((c) => c.Feedback),
   },
   {
     path: '**',

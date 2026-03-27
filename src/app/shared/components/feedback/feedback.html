@@ -1,0 +1,30 @@
+<app-wrapper-card [noHeader]="true">
+  <div class="d-flex flex-column align-items-center gap-3 text-center">
+    <div class="feedback__type" [attr.data-type]="state().type || type()">
+      @switch (state().type || type()) {
+        @case ('success') {
+          <i class="fa-regular fa-circle-check"></i>
+        }
+        @case ('warning') {
+          <i class="fa-regular fa-circle-exclamation"></i>
+        }
+        @case ('error') {
+          <i class="fa-regular fa-circle-xmark"></i>
+        }
+        @default {
+          <i class="fa-regular fa-circle-exclamation"></i>
+        }
+      }
+    </div>
+
+    <div class="text-center">
+      <h1>{{ state().label || label() }}</h1>
+    </div>
+
+    <p>{{ state().message || message() }}</p>
+
+    <app-button class="mt-4" [label]="state().actionLabel || actionLabel()" [routerLink]="state().actionRoute || actionRoute()" />
+  </div>
+</app-wrapper-card>
+
+{{ state() | json }}
