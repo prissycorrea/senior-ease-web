@@ -1,0 +1,12 @@
+.header {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-color);
+  height: 64px;
+  figure {
+    width: 270px;
+    img {
+      width: 100%;
+    }
+  }
+}

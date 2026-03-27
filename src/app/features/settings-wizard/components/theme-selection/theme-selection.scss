@@ -1,0 +1,102 @@
+:host {
+  width: 100%;
+  .dark-theme {
+    --bg-card: #1e1e1e;
+    --color-card: #ffffff;
+    --icon-card: #4da6ff;
+  }
+  .theme-selection {
+    &__options {
+      display: flex;
+      gap: 12px;
+      font-family: 'Inter', sans-serif;
+      justify-content: center;
+    }
+
+    &__card {
+      background-color: var(--bg-card, #ffffff);
+      width: 40%;
+      max-width: 450px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 16px;
+      border: 3px solid #e2e8f0; /* Cinza suave */
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      position: relative;
+      &.active {
+        border-color: var(--icon-card, var(--primary-icon-color));
+        // background-color: #f8fafc;
+        box-shadow: 0 4px 6px -1px rgba(0, 26, 87, 0.1);
+      }
+    }
+    &__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+
+      input[type='radio'] {
+        display: none;
+      }
+      &-label {
+        font-weight: 600;
+        color: var(--color-card, #1e293b);
+      }
+    }
+    &__content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      width: 100%;
+      i {
+        font-size: 60px;
+        color: var(--icon-card, var(--primary-icon-color));
+      }
+    }
+  }
+
+  .title {
+    display: block;
+    font-weight: 600;
+    color: #1e293b;
+  }
+
+  .description {
+    background-color: #d9d9d9;
+    padding: 15px;
+    border-radius: 20px;
+    width: calc(100% - 30px);
+  }
+
+  /* O círculo customizado */
+  .custom-check {
+    width: 20px;
+    height: 20px;
+    border: 2px solid;
+    border-color: var(--icon-card, var(--primary-icon-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .active .custom-check {
+    // border-color: #001a57;
+    border-color: var(--icon-card, var(--primary-icon-color));
+  }
+
+  /* O "pingo" dentro do círculo quando ativo */
+  .active .custom-check::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: var(--icon-card, var(--primary-icon-color));
+    border-radius: 50%;
+  }
+}

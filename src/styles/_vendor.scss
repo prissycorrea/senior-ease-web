@@ -1,0 +1,16 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-family-inter);
+  background-color: var(--bg-body);
+  height: 100vh;
+}
+
+h1 {
+  font-size: 40px;
+}

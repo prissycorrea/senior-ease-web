@@ -1,0 +1,11 @@
+<div class="wrapper-card">
+  @if (!noHeader()) {
+    <app-header />
+  }
+
+  <div class="wrapper-card__content" [style.height.vh]="noHeader() ? 100 : null">
+    <div class="wrapper-card__container">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>
