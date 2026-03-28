@@ -9,8 +9,7 @@ export function dashboardNovoForm() {
       task: builder.control('', Validators.required),
     }),
     step2: builder.group({
-      date: builder.control('', []),
-      time: builder.control('', []),
+      period: builder.control('', []),
     }),
   });
 

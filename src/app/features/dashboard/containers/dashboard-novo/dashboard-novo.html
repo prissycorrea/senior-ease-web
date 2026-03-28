@@ -1,12 +1,12 @@
 <app-wrapper-card [noHeader]="true">
-  <form [formGroup]="form">
+  <form [formGroup]="form" class="w-100">
     <app-custom-stepper [isLinear]="true" (finalizeEmit)="cadastrarTarefa()">
       <cdk-step [stepControl]="form.controls.step1" formGroupName="step1">
         <app-dashboard-novo-tarefa formControlName="task" />
       </cdk-step>
 
       <cdk-step [stepControl]="form.controls.step2" formGroupName="step2">
-        <!-- <app-font-size (fontSizeEmit)="fontSizeOption.set($event)" /> -->
+        <app-dashboard-agendamento formControlName="period"></app-dashboard-agendamento>
       </cdk-step>
     </app-custom-stepper>
   </form>

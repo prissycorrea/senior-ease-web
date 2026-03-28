@@ -5,10 +5,11 @@ import { CustomStepper } from '../../../../shared/components/custom-stepper/cust
 import { WrapperCard } from '../../../../shared/components/wrapper-card/wrapper-card';
 import { DashboardNovoTarefa } from '../../components/dashboard-novo-tarefa/dashboard-novo-tarefa';
 import { dashboardNovoForm } from '../../services/dashboard-novo.form';
+import { DashboardAgendamento } from "../../components/dashboard-agendamento/dashboard-agendamento";
 
 @Component({
   selector: 'app-dashboard-novo',
-  imports: [WrapperCard, CustomStepper, CdkStep, DashboardNovoTarefa, ReactiveFormsModule],
+  imports: [WrapperCard, CustomStepper, CdkStep, DashboardNovoTarefa, ReactiveFormsModule, DashboardAgendamento],
   templateUrl: './dashboard-novo.html',
   styleUrl: './dashboard-novo.scss',
 })
