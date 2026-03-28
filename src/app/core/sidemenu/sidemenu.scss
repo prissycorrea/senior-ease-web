@@ -55,7 +55,7 @@
   }
   &__content {
     flex: 1;
-    padding: 20px;
-    // background-color: var(--bg-color);
+    padding-block: 20px;
+    padding-inline: 100px;
   }
 }
