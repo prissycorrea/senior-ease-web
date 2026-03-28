@@ -12,10 +12,8 @@ export const SIDEMENU_ROUTES: Routes = [
       },
       {
         path: 'dashboard',
-        loadComponent: () =>
-          import('./../../features/dashboard/containers/dashboard/dashboard').then(
-            (c) => c.Dashboard,
-          ),
+        loadChildren: () =>
+          import('../../features/dashboard/dashboard.routes').then((r) => r.DASHBOARD_ROUTES),
       },
     ],
   },

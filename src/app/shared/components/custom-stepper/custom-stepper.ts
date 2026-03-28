@@ -24,7 +24,6 @@ export class CustomStepper extends CdkStepper {
   override next() {
     const currentStep = this.selected;
 
-    // Se for linear, verificamos o 'stepControl' que o PAI passou
     if (this.isLinear() && currentStep?.stepControl?.invalid) {
       currentStep.stepControl.markAllAsTouched();
       return;

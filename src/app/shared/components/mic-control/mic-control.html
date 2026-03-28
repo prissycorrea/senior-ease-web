@@ -1,0 +1,9 @@
+<div class="d-flex flex-column align-items-center">
+  <app-button (click)="toggleMic()" appearance="circle" [recording]="isRecording()">
+    @if (isRecording()) {
+      <i class="fa-solid fa-stop"></i>
+    } @else {
+      <i class="fa-solid fa-microphone"></i>
+    }
+  </app-button>
+</div>

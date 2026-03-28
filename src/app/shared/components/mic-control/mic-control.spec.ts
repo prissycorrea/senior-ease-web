@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AuthInput } from './auth-input';
+import { MicControl } from './mic-control';
 
-describe('AuthInput', () => {
-  let component: AuthInput;
-  let fixture: ComponentFixture<AuthInput>;
+describe('MicControl', () => {
+  let component: MicControl;
+  let fixture: ComponentFixture<MicControl>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AuthInput]
+      imports: [MicControl]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AuthInput);
+    fixture = TestBed.createComponent(MicControl);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

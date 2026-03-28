@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 
 @Component({
   selector: 'app-button',
@@ -13,4 +13,8 @@ export class Button {
   public disabled = input<boolean>(false);
   public loading = input<boolean>(false);
   public direction = input<'row' | 'column'>('row');
+  public appearance = input<'circle' | 'default'>('default');
+  public recording = input<boolean>(false);
+
+  public isBtnCircle = computed(() => this.appearance() === 'circle');
 }
