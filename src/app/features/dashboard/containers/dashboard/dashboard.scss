@@ -6,6 +6,11 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  cursor: pointer;
+  transition: .3s ease-in-out;
+  &:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 26, 87, 0.1);
+  }
   &__icon {
     width: 55px;
     height: 60px;
@@ -14,6 +19,7 @@
     align-items: center;
     justify-content: center;
     background-color: var(--info-color);
+    color: var(--bg-color);
   }
   &__content {
     flex: 1;

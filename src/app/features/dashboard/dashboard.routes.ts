@@ -13,6 +13,11 @@ export const DASHBOARD_ROUTES: Routes = [
         loadComponent: () =>
           import('./containers/dashboard-novo/dashboard-novo').then((c) => c.DashboardNovo),
       },
+      {
+        path: 'feedback',
+        loadComponent: () =>
+          import('../../shared/components/feedback/feedback').then((c) => c.Feedback),
+      },
     ],
   },
 ];

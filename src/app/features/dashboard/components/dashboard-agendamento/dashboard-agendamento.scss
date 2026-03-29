@@ -12,6 +12,8 @@ $component-name: 'card-agendamento';
     gap: 10px;
     border: 3px solid #e2e8f0;
     transition: 0.1s ease-in-out;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
     &:hover {
       background-color: var(--primary-color-hover);
       color: var(--bg-color);

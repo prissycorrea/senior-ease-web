@@ -23,8 +23,10 @@
 
     <p>{{ state().message || message() }}</p>
 
-    <app-button class="mt-4" [label]="state().actionLabel || actionLabel()" [routerLink]="state().actionRoute || actionRoute()" />
+    <app-button
+      class="mt-4"
+      [label]="state().actionLabel || actionLabel()"
+      [routerLink]="state().actionRoute || actionRoute()"
+    />
   </div>
 </app-wrapper-card>
-
-{{ state() | json }}

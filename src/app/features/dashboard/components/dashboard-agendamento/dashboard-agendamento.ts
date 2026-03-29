@@ -30,10 +30,11 @@ export class DashboardAgendamento implements ControlValueAccessor {
 
   // Armazena a data selecionada (Date ou string formatada)
   readonly dataSelecionada = signal<Date | null>(null);
+  private readonly _dataSelecionada = signal<string>('');
 
   constructor() {
     effect(() => {
-      this.onChanged(this.dataSelecionada());
+      this.onChanged(this._dataSelecionada());
       // this._dialog.open(DashboardAgendamento);
     });
   }
@@ -75,7 +76,8 @@ export class DashboardAgendamento implements ControlValueAccessor {
       const data = dia.data.toISOString().split('T')[0];
       const dataLocal = new Date(`${data} ${horario}`);
 
-      this.dataSelecionada.set(new Date(dataLocal));
+      this.dataSelecionada.set(dia.data);
+      this._dataSelecionada.set(dataLocal.toISOString());
     });
   }
 
