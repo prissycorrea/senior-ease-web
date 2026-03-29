@@ -1,5 +1,7 @@
-import { Component, effect, forwardRef, signal } from '@angular/core';
+import { Component, effect, forwardRef, inject, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { DashboardAgendamentoTime } from '../dashboard-agendamento-time/dashboard-agendamento-time';
 interface DiaAgendamento {
   data: Date;
   label: string;
@@ -20,6 +22,7 @@ interface DiaAgendamento {
   ],
 })
 export class DashboardAgendamento implements ControlValueAccessor {
+  private readonly _dialog = inject(MatDialog);
   // Signals para performance e reatividade
   readonly hoje = signal<DiaAgendamento | null>(null);
   readonly amanha = signal<DiaAgendamento | null>(null);
@@ -31,6 +34,7 @@ export class DashboardAgendamento implements ControlValueAccessor {
   constructor() {
     effect(() => {
       this.onChanged(this.dataSelecionada());
+      // this._dialog.open(DashboardAgendamento);
     });
   }
 
@@ -65,7 +69,14 @@ export class DashboardAgendamento implements ControlValueAccessor {
   }
 
   selecionar(dia: DiaAgendamento) {
-    this.dataSelecionada.set(dia.data);
+    const dialogRef = this._dialog.open(DashboardAgendamentoTime);
+
+    dialogRef.afterClosed().subscribe((horario: string) => {
+      const data = dia.data.toISOString().split('T')[0];
+      const dataLocal = new Date(`${data} ${horario}`);
+
+      this.dataSelecionada.set(new Date(dataLocal));
+    });
   }
 
   onChanged = (val: any) => {};
