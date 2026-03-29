@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Button } from '../../shared/components/button/button';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-sidemenu',
@@ -8,4 +9,10 @@ import { Button } from '../../shared/components/button/button';
   templateUrl: './sidemenu.html',
   styleUrl: './sidemenu.scss',
 })
-export class Sidemenu {}
+export class Sidemenu {
+  private _authService = inject(AuthService);
+
+  public logout() {
+    this._authService.logout();
+  }
+}
