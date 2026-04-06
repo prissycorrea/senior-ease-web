@@ -49,6 +49,9 @@ export class DashboardAgendamento implements ControlValueAccessor {
 
     for (let i = 0; i < 8; i++) {
       const d = new Date();
+
+      d.setHours(0, 0, 0, 0);
+
       d.setDate(d.getDate() + i);
 
       const dia: DiaAgendamento = {
