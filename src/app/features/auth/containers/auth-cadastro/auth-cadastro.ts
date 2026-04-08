@@ -3,12 +3,12 @@ import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CustomStepper } from '../../../../shared/components/custom-stepper/custom-stepper';
-import { AuthInput } from '../../components/auth-input/auth-input';
+import { Input } from '../../../../shared/components/input/input';
 import { authCadastroForm } from '../../services/forms/auth-cadastro.form';
 
 @Component({
   selector: 'app-auth-cadastro',
-  imports: [CustomStepper, CdkStep, AuthInput, ReactiveFormsModule],
+  imports: [CustomStepper, CdkStep, Input, ReactiveFormsModule],
   templateUrl: './auth-cadastro.html',
   styleUrl: './auth-cadastro.scss',
 })

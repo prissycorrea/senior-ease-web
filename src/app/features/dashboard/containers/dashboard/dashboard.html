@@ -1,0 +1,83 @@
+<div class="container">
+  <app-dashboard-header />
+
+  <h2>Próximas atividades</h2>
+
+  <div class="d-flex flex-wrap gap-3 my-5">
+    <div class="card-dashboard">
+      <div class="card-dashboard__icon">
+        <i class="fa-solid fa-prescription-bottle-medical"></i>
+      </div>
+      <div class="card-dashboard__content">
+        <h5>Tomar Remédio</h5>
+        <p><i class="fa-regular fa-clock"></i> 10:00 - Diário</p>
+      </div>
+      <div class="card-dashboard__actions">
+        <i class="fa-solid fa-angle-right"></i>
+      </div>
+    </div>
+    <div class="card-dashboard">
+      <div class="card-dashboard__icon">
+        <i class="fa-solid fa-prescription-bottle-medical"></i>
+      </div>
+      <div class="card-dashboard__content">
+        <h5>Tomar Remédio</h5>
+        <p><i class="fa-regular fa-clock"></i> 10:00 - Diário</p>
+      </div>
+      <div class="card-dashboard__actions">
+        <i class="fa-solid fa-angle-right"></i>
+      </div>
+    </div>
+    <div class="card-dashboard">
+      <div class="card-dashboard__icon">
+        <i class="fa-solid fa-prescription-bottle-medical"></i>
+      </div>
+      <div class="card-dashboard__content">
+        <h5>Tomar Remédio</h5>
+        <p><i class="fa-regular fa-clock"></i> 10:00 - Diário</p>
+      </div>
+      <div class="card-dashboard__actions">
+        <i class="fa-solid fa-angle-right"></i>
+      </div>
+    </div>
+    <div class="card-dashboard card-dashboard--disabled">
+      <div class="card-dashboard__icon">
+        <i class="fa-solid fa-prescription-bottle-medical"></i>
+      </div>
+      <div class="card-dashboard__content">
+        <h5>Tomar Remédio</h5>
+        <p><i class="fa-regular fa-clock"></i> 10:00 - Diário</p>
+      </div>
+      <div class="card-dashboard__actions">
+        <i class="fa-solid fa-angle-right"></i>
+      </div>
+    </div>
+  </div>
+
+  <app-progress-bar></app-progress-bar>
+
+  <div class="d-flex flex-wrap gap-5 my-5">
+    <div class="card-dashboard">
+      <div class="card-dashboard__icon">
+        <i class="fa-solid fa-prescription-bottle-medical"></i>
+      </div>
+      <div class="card-dashboard__content">
+        <h5>3</h5>
+        <p>Atividades pendentes</p>
+      </div>
+    </div>
+    <div class="card-dashboard">
+      <div class="card-dashboard__icon">
+        <i class="fa-solid fa-prescription-bottle-medical"></i>
+      </div>
+      <div class="card-dashboard__content">
+        <h5>1</h5>
+        <p>Atividades concluída</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <app-button type="primary" label="Nova tarefa" (click)="redirectToNewTask()" />
+  </div>
+</div>

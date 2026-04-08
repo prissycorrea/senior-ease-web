@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AuthInput } from './auth-input';
+import { DashboardAgendamento } from './dashboard-agendamento';
 
-describe('AuthInput', () => {
-  let component: AuthInput;
-  let fixture: ComponentFixture<AuthInput>;
+describe('DashboardAgendamento', () => {
+  let component: DashboardAgendamento;
+  let fixture: ComponentFixture<DashboardAgendamento>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AuthInput]
+      imports: [DashboardAgendamento]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AuthInput);
+    fixture = TestBed.createComponent(DashboardAgendamento);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

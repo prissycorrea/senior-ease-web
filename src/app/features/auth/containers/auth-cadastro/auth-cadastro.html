@@ -2,7 +2,7 @@
   <app-custom-stepper [isLinear]="true" (finalizeEmit)="cadastrarUsuario()">
     <cdk-step [stepControl]="form.controls.step1">
       <div formGroupName="step1" class="w-100">
-        <app-auth-input
+        <app-input
           label="Como podemos te chamar?"
           inputLabel="Digite seu nome"
           type="text"
@@ -14,7 +14,7 @@
 
     <cdk-step [stepControl]="form.controls.step2">
       <div formGroupName="step2" class="w-100">
-        <app-auth-input
+        <app-input
           label="Qual seu e-mail?"
           inputLabel="Digite seu e-mail"
           type="email"
@@ -26,7 +26,7 @@
 
     <cdk-step [stepControl]="form.controls.step3">
       <div formGroupName="step3" class="w-100">
-        <app-auth-input
+        <app-input
           label="Crie uma senha segura?"
           inputLabel="Sua senha deve ser fácil de lembrar, mas difícil de adivinhar."
           type="password"

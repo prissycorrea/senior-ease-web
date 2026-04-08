@@ -5,3 +5,37 @@
     width: 100%;
   }
 }
+
+button {
+  &.circle {
+    border-radius: 50%;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: large;
+    font-weight: bold;
+    color: white;
+    border: none;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  &.pulsing {
+    animation: pulse-sonar 2s infinite;
+  }
+}
+
+// Definição da animação
+@keyframes pulse-sonar {
+  0% {
+    box-shadow: 0 0 0 0 #42a9b3;
+  }
+  50% {
+    box-shadow:
+      0 0 0 10px #98dde4,
+      0 0 0 20px rgba(220, 245, 247, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0 0 #42a9b3;
+  }
+}

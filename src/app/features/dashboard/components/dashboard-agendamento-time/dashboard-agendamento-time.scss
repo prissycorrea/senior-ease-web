@@ -1,0 +1,16 @@
+.dropdown-timer {
+  &__menu {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 2px solid #000; // Alto contraste para idosos
+  }
+  &__item {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    &:hover {
+      background-color: #0d6efd;
+      color: white;
+    }
+  }
+}

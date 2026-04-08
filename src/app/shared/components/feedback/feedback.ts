@@ -1,18 +1,15 @@
-import { Component, inject, input, signal } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component, input, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Button } from '../button/button';
 import { WrapperCard } from '../wrapper-card/wrapper-card';
-import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-feedback',
-  imports: [WrapperCard, Button, JsonPipe, RouterLink],
+  imports: [WrapperCard, Button, RouterLink],
   templateUrl: './feedback.html',
   styleUrl: './feedback.scss',
 })
 export class Feedback {
-  private _router = inject(Router);
-
   public type = input<'success' | 'warning' | 'error' | 'info'>('success');
   public label = input<string>('');
   public message = input<string>('');

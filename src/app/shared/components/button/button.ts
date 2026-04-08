@@ -1,13 +1,10 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 
 @Component({
   selector: 'app-button',
   imports: [],
   templateUrl: './button.html',
   styleUrl: './button.scss',
-  host: {
-    '[class.w-100]': 'full()',
-  },
 })
 export class Button {
   public label = input<string>('');
@@ -16,5 +13,8 @@ export class Button {
   public disabled = input<boolean>(false);
   public loading = input<boolean>(false);
   public direction = input<'row' | 'column'>('row');
-  public full = input<boolean>(false);
+  public appearance = input<'circle' | 'default'>('default');
+  public recording = input<boolean>(false);
+
+  public isBtnCircle = computed(() => this.appearance() === 'circle');
 }

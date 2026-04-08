@@ -1,4 +1,4 @@
-input {
+input, select {
   border-radius: 20px;
   border-width: 3px;
   border-style: solid;
@@ -6,4 +6,8 @@ input {
   height: 119px;
   padding: 20px;
   font-size: 24px;
+}
+
+select {
+  background-color: transparent;
 }

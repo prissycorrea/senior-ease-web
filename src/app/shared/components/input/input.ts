@@ -2,22 +2,22 @@ import { Component, forwardRef, input, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-  selector: 'app-auth-input',
+  selector: 'app-input',
   imports: [],
-  templateUrl: './auth-input.html',
-  styleUrl: './auth-input.scss',
+  templateUrl: './input.html',
+  styleUrl: './input.scss',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => AuthInput),
+      useExisting: forwardRef(() => Input),
       multi: true,
     },
   ],
 })
-export class AuthInput implements ControlValueAccessor {
+export class Input implements ControlValueAccessor {
   protected value = signal<string>('');
   protected isDisabled = signal<boolean>(false);
-  protected readonly inputId: string = `auth-input-${Math.random().toString(36).substring(2, 9)}`;
+  protected readonly inputId: string = `input-${Math.random().toString(36).substring(2, 9)}`;
 
   public label = input<string>('');
   public inputLabel = input<string>('');

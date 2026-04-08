@@ -1,0 +1,27 @@
+<div class="d-flex flex-column gap-5">
+  <app-input
+    label="O que você precisa fazer?"
+    inputLabel="Digite ou fale a sua nova tarefa"
+    type="text"
+    class="w-100"
+    [formControl]="taskControl"
+  />
+
+  <div class="d-flex align-items-center flex-column gap-3">
+    <p class="text-muted">Ou use a voz</p>
+
+    <app-mic-control
+      (startRecording)="isRecording.set($event)"
+      (stopRecording)="newTask.set($event)"
+    >
+    </app-mic-control>
+
+    <p class="text-muted">
+      @if (isRecording()) {
+        Ouvindo agora...
+      } @else {
+        Toque para falar
+      }
+    </p>
+  </div>
+</div>

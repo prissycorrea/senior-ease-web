@@ -1,0 +1,29 @@
+<div class="p-5">
+  <div class="text-center mb-5">
+    <h1>Horario da tarefa</h1>
+  </div>
+  <div class="dropdown-timer dropdown">
+    <button
+      class="btn btn-secondary dropdown-toggle w-100"
+      type="button"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >
+      {{ horarioSelecionado() || 'Escolha o horario da tarefa' }}
+    </button>
+    <ul class="dropdown-menu dropdown-timer__menu">
+      @for (item of horarios(); track $index) {
+        <li
+          class="dropdown-item dropdown-timer__item"
+          [class.active]="horarioSelecionado() === item"
+          (click)="selecionar(item)"
+        >
+          {{ item }}
+        </li>
+      }
+    </ul>
+  </div>
+
+
+  <app-button label="Confirmar horário" (click)="salvarHorario()" />
+</div>
