@@ -10,18 +10,10 @@
     </p>
   </div>
   <div class="font-size__actions">
-    <app-button
-      (click)="decreaseFontSize(); fontSizeEmit.emit(fontSize())"
-      label="Diminuir"
-      direction="column"
-    >
+    <app-button (click)="decreaseFontSize()" label="Diminuir" direction="column">
       <i class="fa-solid fa-minus"></i>
     </app-button>
-    <app-button
-      (click)="increaseFontSize(); fontSizeEmit.emit(fontSize())"
-      label="Aumentar"
-      direction="column"
-    >
+    <app-button (click)="increaseFontSize()" label="Aumentar" direction="column">
       <i class="fa-solid fa-plus"></i>
     </app-button>
   </div>

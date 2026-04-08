@@ -16,7 +16,7 @@
           name="theme"
           [value]="option.id"
           [checked]="selectedTheme() === option.id"
-          (change)="onSelect(option.id); optionEmit.emit(option.id)"
+          (change)="onSelect(option.id)"
         />
         <span class="theme-selection__header-label">{{ option.label }}</span>
         <div class="custom-check"></div>
