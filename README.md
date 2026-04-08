@@ -1,59 +1,134 @@
-# SeniorEaseWeb
+# Senior Ease Web
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.1.
+Aplicativo web pensado para **apoiar pessoas idosas** no dia a dia: visual confortável, letras ajustáveis, rotinas e agenda em linguagem simples. Projeto desenvolvido no contexto do **Hackaton (FIAP)** — Fase 5 da pós graduação em Front End Engineering.
 
-## Development server
+### Neste documento
 
-To start a local development server, run:
+1. [O que é o app](#o-que-é-o-app)
+2. [Firebase e versão web](#firebase-e-versão-web)
+3. [Jornada no app — etapa por etapa](#jornada-no-app--etapa-por-etapa)
+4. [Funcionalidades e público idoso](#funcionalidades-e-facilidades-público-idoso)
+5. [Arquitetura](#arquitetura)
+6. [Testes](#testes)
+7. [Tecnologias](#tecnologias-utilizadas)
+8. [Pipelines (CI/CD)](#pipelines-e-etapas-github-actions)
+9. [Como rodar](#como-rodar-o-app)
 
-```bash
-ng serve
+---
+
+## O que é o app
+
+O **Senior Ease** é um protótipo de webApp **Angular** que simula uma experiência completa: da primeira abertura até o uso cotidiano com **lista de atividades**, **agenda por dia**, **criação de tarefas** e **ajustes de acessibilidade**.
+
+---
+
+## Firebase e versão web
+
+O projeto usa o SDK **Firebase** via **AngularFire** (`@angular/fire`): **Authentication** (e-mail e senha) e **Cloud Firestore** para as tarefas, alinhado ao **mesmo projeto Firebase** da **versão mobile** do Senior Ease, quando ambos apontam para o mesmo `projectId` e regras de segurança.
+
+Com isso, a pessoa tem acesso às **mesmas coisas** nos dois lugares: **a mesma conta** (perfil no Auth) e a **mesma lista de tarefas** na coleção compartilhada, desde que as **regras de segurança** do Firestore e o provedor de e-mail/senha estejam habilitados no console do Firebase.
+
+---
+
+## Jornada no app — etapa por etapa
+
+| Etapa                         | O que acontece                                                                                                                                                                                                                       |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **1. Conforto visual**        | Escolha entre tema padrão (cores suaves) ou **alto contraste**, com explicação clara do propósito.                                                                                                                                   |
+| **2. Tamanho da letra**       | Ajuste do **multiplicador de fonte** com pré-visualização; valor é salvo e aplicado em todo o app.                                                                                                                                   |
+| **3. Boas-vindas**            | Tela de entrada com **Criar conta** ou **Já tenho conta**.                                                                                                                                                                           |
+| **4. Cadastro (3 passos)**    | Nome → e-mail → senha e confirmação; com **Firebase** configurado, a conta é criada na nuvem (**mesmo Auth que na web**).                                                                                                            |
+| **5. Login (2 passos)**       | E-mail e senha via **Firebase**;                                                                                                                                                                                                     |
+| **6. App principal — Início** | Lista **“Próximas atividades”**, **progresso diário**, detalhe da tarefa, **adicionar tarefa** (fluxo guiado com data/horário).                                                                                                      |
+| **7. App principal — Agenda** | Faixa de **dias rolável** com o dia atual centralizado; lista filtrada por data; mesma linha visual da home.                                                                                                                         |
+| **8. Ajustes**                | Perfil resumido, **tamanho da letra** (reabre o fluxo de ajuste), **interruptor de alto contraste**, atalhos informativos (ex.: privacidade) e **Sair da conta** (volta à boas-vindas; encerra sessão no Firebase quando aplicável). |
+
+---
+
+## Funcionalidades e facilidades (público idoso)
+
+- **Tipografia Lexend** e tamanhos que **escalam** com o multiplicador global, reduzindo esforço de leitura.
+- **Alto contraste** persistente, com paleta dedicada (cores, bordas e componentes adaptados).
+- **Botões e áreas de toque** amplas, textos diretos e hierarquia visual clara (títulos em destaque, cartões com bordas suaves).
+- **Rotina visível**: progresso do dia e lista de atividades com estado concluído/pendente explícito.
+- **Agenda por dia**: seleção de data em “pílulas”, data por extenso em português e lista do dia.
+- **Criação de tarefa passo a passo** (título → dia/horário), com confirmação de sucesso amigável.
+- **Ajustes centralizados** para alterar contraste e letra sem refazer o onboarding inteiro.
+
+---
+
+## Arquitetura
+
+Organização por **features** e **camadas** dentro de `src/app/`:
+
+```
+src/app/
+├── core/              # Shell (header, sidemenu) e rotas do layout
+├── features/          # Módulos de negócio
+│   ├── auth/          # Login, cadastro, auth-root
+│   ├── dashboard/     # Dashboard, nova tarefa, serviços e tarefas
+│   └── settings-wizard/  # Passo a passo de tema e fonte
+├── shared/            # Componentes, guards, serviços compartilhados
+├── app.config.ts      # Providers (Firebase, locale pt-BR, router)
+└── app.routes.ts      # Rotas principais e lazy loading
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **Guards**: `authGuard` redireciona usuários não autenticados para `/autenticacao/login`.
+- **Serviços**: `AuthService`, `TaskService` e formulários próximos às features de auth e dashboard.
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Testes
 
-```bash
-ng generate component component-name
-```
+- **Framework**: [Karma](https://karma-runner.github.io/) + [Jasmine](https://jasmine.github.io/) (padrão do Angular CLI).
+- **Comando**: `npm test` (alias de `ng test`); executa testes unitários em navegador headless conforme configuração do `angular.json`.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## Tecnologias utilizadas
 
-## Building
+| Área           | Tecnologia                                                                                       |
+| -------------- | ------------------------------------------------------------------------------------------------ |
+| Framework      | [Angular](https://angular.dev/) 21                                                               |
+| UI             | [Bootstrap](https://getbootstrap.com/) 5, [Angular Material](https://material.angular.io/) + CDK |
+| Ícones         | [Font Awesome](https://fontawesome.com/) (pacote free)                                           |
+| Backend / auth | [Firebase](https://firebase.google.com/) + [AngularFire](https://github.com/angular/angularfire) |
+| Linguagem      | TypeScript                                                                                       |
+| Estilos        | SCSS                                                                                             |
 
-To build the project run:
+---
 
-```bash
-ng build
-```
+## Como rodar
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### Pré-requisitos
 
-## Running unit tests
+- **Node.js** (versão compatível com Angular 21; recomenda-se a LTS atual).
+- **npm**
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+### Instalação
 
 ```bash
-ng e2e
+git clone <url-do-repositório>
+cd senior-ease-web
+npm ci
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Ajuste `src/environments/environments.ts` com as credenciais do seu projeto Firebase, se for diferente do ambiente padrão do repositório.
 
-## Additional Resources
+### Desenvolvimento
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+npm start
+```
+
+Equivale a `ng serve` — aplicação em `http://localhost:4200/` (porta padrão do CLI).
+
+### Outros scripts
+
+| Script          | Uso                                     |
+| --------------- | --------------------------------------- |
+| `npm run build` | Build de produção (`ng build`)          |
+| `npm run watch` | Build em modo desenvolvimento com watch |
+| `npm test`      | Testes unitários (Karma/Jasmine)        |
+
+---
