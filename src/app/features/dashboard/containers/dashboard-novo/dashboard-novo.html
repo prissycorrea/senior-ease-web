@@ -1,6 +1,6 @@
 <app-wrapper-card [noHeader]="true">
   <form [formGroup]="form" class="w-100">
-    <app-custom-stepper [isLinear]="true" (finalizeEmit)="cadastrarTarefa()">
+    <app-custom-stepper [isLinear]="true" (finalizeEmit)="cadastrarTarefa()" [loading]="isCreating()">
       <cdk-step [stepControl]="form.controls.step1" formGroupName="step1">
         <app-dashboard-novo-tarefa formControlName="task" />
       </cdk-step>

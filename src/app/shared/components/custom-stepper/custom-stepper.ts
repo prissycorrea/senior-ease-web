@@ -16,6 +16,7 @@ export class CustomStepper extends CdkStepper {
   public previousEmit = output<number>();
   public finalizeEmit = output<boolean>();
   public isLinear = input<boolean>(false);
+  public loading = input<boolean>(false);
 
   onClick(index: number): void {
     this.selectedIndex = index;

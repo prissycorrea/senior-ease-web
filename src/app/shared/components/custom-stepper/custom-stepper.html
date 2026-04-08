@@ -22,5 +22,11 @@
     />
   }
 
-  <app-button label="Continuar" (click)="next()" class="btn-next" />
+  <app-button
+    label="Continuar"
+    labelLoading="Carregando..."
+    (click)="next()"
+    class="btn-next"
+    [loading]="loading()"
+  />
 </div>

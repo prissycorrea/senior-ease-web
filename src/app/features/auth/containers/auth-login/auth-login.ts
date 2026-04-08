@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AuthService } from '../../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-auth-login',
@@ -7,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './auth-login.scss',
 })
 export class AuthLogin {
+  private _authService = inject(AuthService);
 
+  constructor() {
+    this._authService.login('jcmagalhaes301@gmail.com', '123456');
+  }
 }

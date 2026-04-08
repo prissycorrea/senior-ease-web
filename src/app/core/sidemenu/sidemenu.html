@@ -6,7 +6,7 @@
     <nav class="sidemenu__nav">
       <ul>
         <li>
-          <a routerLink="/inicio" routerLinkActive="active">
+          <a routerLink="/" routerLinkActive="active">
             <i class="fa-solid fa-house"></i>
             <span>Início</span>
           </a>
@@ -26,7 +26,7 @@
       </ul>
     </nav>
     <div class="sidemenu__actions">
-      <app-button label="Sair da conta" class="w-100" ></app-button>
+      <app-button label="Sair da conta" class="w-100" (click)="logout()"></app-button>
     </div>
   </div>
   <div class="sidemenu__content">

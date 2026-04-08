@@ -1,9 +1,11 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './shared/guards/auth.guard';
 
 // Exemplo da estrutura lógica no app.routes.ts
 export const routes: Routes = [
   {
     path: '',
+    canActivate: [authGuard],
     loadChildren: () => import('./core/sidemenu/sidemenu.routes').then((r) => r.SIDEMENU_ROUTES),
   },
   {
