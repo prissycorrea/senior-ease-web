@@ -4,15 +4,15 @@ Aplicativo web pensado para **apoiar pessoas idosas** no dia a dia: visual confo
 
 ### Neste documento
 
-1. [O que é o app](#o-que-é-o-app)  
-2. [Firebase e versão web](#firebase-e-versão-web)  
-3. [Jornada no app — etapa por etapa](#jornada-no-app--etapa-por-etapa)  
-4. [Funcionalidades e público idoso](#funcionalidades-e-facilidades-público-idoso)  
-5. [Arquitetura](#arquitetura)  
-6. [Testes](#testes)  
-7. [Tecnologias](#tecnologias-utilizadas)  
-8. [Pipelines (CI/CD)](#pipelines-e-etapas-github-actions)  
-9. [Como rodar](#como-rodar-o-app)  
+1. [O que é o app](#o-que-é-o-app)
+2. [Firebase e versão web](#firebase-e-versão-web)
+3. [Jornada no app — etapa por etapa](#jornada-no-app--etapa-por-etapa)
+4. [Funcionalidades e público idoso](#funcionalidades-e-facilidades-público-idoso)
+5. [Arquitetura](#arquitetura)
+6. [Testes](#testes)
+7. [Tecnologias](#tecnologias-utilizadas)
+8. [Pipelines (CI/CD)](#pipelines-e-etapas-github-actions)
+9. [Como rodar](#como-rodar-o-app)
 
 ---
 
@@ -32,17 +32,16 @@ Com isso, a pessoa tem acesso às **mesmas coisas** nos dois lugares: **a mesma 
 
 ## Jornada no app — etapa por etapa
 
-| Etapa | O que acontece |
-|--------|----------------|
-| **1. Conforto visual** | Escolha entre tema padrão (cores suaves) ou **alto contraste**, com explicação clara do propósito. |
-| **2. Tamanho da letra** | Ajuste do **multiplicador de fonte** com pré-visualização; valor é salvo e aplicado em todo o app. |
-| **3. Boas-vindas** | Tela de entrada com **Criar conta** ou **Já tenho conta**. |
-| **4. Cadastro (3 passos)** | Nome → e-mail → senha e confirmação; com **Firebase** configurado, a conta é criada na nuvem (**mesmo Auth que na web**). |
-| **5. Login (2 passos)** | E-mail e senha via **Firebase**; |
-| **6. App principal — Início** | Lista **“Próximas atividades”**, **progresso diário**, detalhe da tarefa, **adicionar tarefa** (fluxo guiado com data/horário). |
-| **7. App principal — Agenda** | Faixa de **dias rolável** com o dia atual centralizado; lista filtrada por data; mesma linha visual da home. |
-| **8. Ajustes** | Perfil resumido, **tamanho da letra** (reabre o fluxo de ajuste), **interruptor de alto contraste**, atalhos informativos (ex.: privacidade) e **Sair da conta** (volta à boas-vindas; encerra sessão no Firebase quando aplicável). |
-
+| Etapa                         | O que acontece                                                                                                                                                                                                                       |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **1. Conforto visual**        | Escolha entre tema padrão (cores suaves) ou **alto contraste**, com explicação clara do propósito.                                                                                                                                   |
+| **2. Tamanho da letra**       | Ajuste do **multiplicador de fonte** com pré-visualização; valor é salvo e aplicado em todo o app.                                                                                                                                   |
+| **3. Boas-vindas**            | Tela de entrada com **Criar conta** ou **Já tenho conta**.                                                                                                                                                                           |
+| **4. Cadastro (3 passos)**    | Nome → e-mail → senha e confirmação; com **Firebase** configurado, a conta é criada na nuvem (**mesmo Auth que na web**).                                                                                                            |
+| **5. Login (2 passos)**       | E-mail e senha via **Firebase**;                                                                                                                                                                                                     |
+| **6. App principal — Início** | Lista **“Próximas atividades”**, **progresso diário**, detalhe da tarefa, **adicionar tarefa** (fluxo guiado com data/horário).                                                                                                      |
+| **7. App principal — Agenda** | Faixa de **dias rolável** com o dia atual centralizado; lista filtrada por data; mesma linha visual da home.                                                                                                                         |
+| **8. Ajustes**                | Perfil resumido, **tamanho da letra** (reabre o fluxo de ajuste), **interruptor de alto contraste**, atalhos informativos (ex.: privacidade) e **Sair da conta** (volta à boas-vindas; encerra sessão no Firebase quando aplicável). |
 
 ---
 
@@ -88,14 +87,14 @@ src/app/
 
 ## Tecnologias utilizadas
 
-| Área | Tecnologia |
-|------|------------|
-| Framework | [Angular](https://angular.dev/) 21 |
-| UI | [Bootstrap](https://getbootstrap.com/) 5, [Angular Material](https://material.angular.io/) + CDK |
-| Ícones | [Font Awesome](https://fontawesome.com/) (pacote free) |
+| Área           | Tecnologia                                                                                       |
+| -------------- | ------------------------------------------------------------------------------------------------ |
+| Framework      | [Angular](https://angular.dev/) 21                                                               |
+| UI             | [Bootstrap](https://getbootstrap.com/) 5, [Angular Material](https://material.angular.io/) + CDK |
+| Ícones         | [Font Awesome](https://fontawesome.com/) (pacote free)                                           |
 | Backend / auth | [Firebase](https://firebase.google.com/) + [AngularFire](https://github.com/angular/angularfire) |
-| Linguagem | TypeScript |
-| Estilos | SCSS |
+| Linguagem      | TypeScript                                                                                       |
+| Estilos        | SCSS                                                                                             |
 
 ---
 
@@ -103,7 +102,7 @@ src/app/
 
 ### Pré-requisitos
 
-- **Node.js** (versão compatível com Angular 21; recomenda-se a LTS atual).  
+- **Node.js** (versão compatível com Angular 21; recomenda-se a LTS atual).
 - **npm**
 
 ### Instalação
@@ -126,10 +125,10 @@ Equivale a `ng serve` — aplicação em `http://localhost:4200/` (porta padrão
 
 ### Outros scripts
 
-| Script | Uso |
-|--------|-----|
-| `npm run build` | Build de produção (`ng build`) |
+| Script          | Uso                                     |
+| --------------- | --------------------------------------- |
+| `npm run build` | Build de produção (`ng build`)          |
 | `npm run watch` | Build em modo desenvolvimento com watch |
-| `npm test` | Testes unitários (Karma/Jasmine) |
+| `npm test`      | Testes unitários (Karma/Jasmine)        |
 
 ---

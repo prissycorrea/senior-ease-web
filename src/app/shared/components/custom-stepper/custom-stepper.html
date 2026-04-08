@@ -1,0 +1,26 @@
+<div class="stepper-container">
+  @for (step of steps; track $index) {
+    <div
+      class="step-bar"
+      [class.active]="$index === selectedIndex"
+      [class.disabled]="isLinear() && $index > selectedIndex"
+      (click)="!isLinear() || $index <= selectedIndex ? onClick($index) : null"
+    ></div>
+  }
+</div>
+
+<div class="step-content">
+  <ng-container [ngTemplateOutlet]="selected?.content || null"></ng-container>
+</div>
+
+<div class="stepper-actions">
+  @if (selectedIndex > 0) {
+    <app-button
+      label="Voltar"
+      type="secondary"
+      (click)="previous(); previousEmit.emit(selectedIndex)"
+    />
+  }
+
+  <app-button label="Continuar" (click)="next()" class="btn-next" />
+</div>

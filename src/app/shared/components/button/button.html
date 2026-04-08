@@ -1,0 +1,15 @@
+<button [attr.data-type]="type()" [disabled]="disabled() || loading()">
+  <div class="d-flex align-items-center gap-2" [class.flex-column]="direction() === 'column'">
+    @if (loading()) {
+      <div class="spinner-grow spinner-grow-sm" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <span>{{ labelLoading() }}</span>
+    } @else {
+      <ng-content></ng-content>
+      @if (label()) {
+        <span>{{ label() }}</span>
+      }
+    }
+  </div>
+</button>
