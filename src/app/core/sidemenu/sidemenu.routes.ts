@@ -15,6 +15,11 @@ export const SIDEMENU_ROUTES: Routes = [
         loadChildren: () =>
           import('../../features/dashboard/dashboard.routes').then((r) => r.DASHBOARD_ROUTES),
       },
+      {
+        path: 'ajustes',
+        loadChildren: () =>
+          import('../../features/ajustes/ajustes.routes').then((r) => r.AJUSTES_ROUTES),
+      },
     ],
   },
 ];

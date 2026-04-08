@@ -4,4 +4,5 @@ export interface Task {
   period: string;
   completed: boolean;
   createdAt: Date;
+  userId?: string;
 }

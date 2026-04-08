@@ -1,4 +1,4 @@
-import { AsyncPipe, DatePipe, JsonPipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Button } from '../../../../shared/components/button/button';
@@ -10,7 +10,7 @@ import { DashboardHeader } from './../../components/dashboard-header/dashboard-h
 
 @Component({
   selector: 'app-dashboard',
-  imports: [DashboardHeader, Button, ProgressBar, JsonPipe, AsyncPipe, DatePipe],
+  imports: [DashboardHeader, Button, ProgressBar, DatePipe],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })
@@ -26,10 +26,6 @@ export class Dashboard {
 
   get user() {
     return this._authService.user;
-  }
-
-  public ngOnInit() {
-    // this.tasks$ = this._service.getTodayTasks();
   }
 
   public redirectToNewTask() {
