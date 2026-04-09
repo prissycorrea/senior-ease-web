@@ -12,6 +12,8 @@ import { AuthService } from '../../shared/services/auth.service';
 export class Sidemenu {
   private _authService = inject(AuthService);
 
+  public loadingLogout = this._authService.loadingLogout;
+
   public logout() {
     this._authService.logout();
   }
