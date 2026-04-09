@@ -23,7 +23,7 @@ jobs:
           chrome-version: stable
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: Run tests
         run: npm test -- --no-watch --browsers=ChromeHeadless
