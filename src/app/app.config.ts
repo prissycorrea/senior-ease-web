@@ -1,4 +1,5 @@
 import {
+  APP_INITIALIZER,
   ApplicationConfig,
   LOCALE_ID,
   provideBrowserGlobalErrorListeners,
@@ -13,8 +14,10 @@ import localePt from '@angular/common/locales/pt';
 import { initializeApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore } from '@angular/fire/firestore';
+import { getStorage, provideStorage } from '@angular/fire/storage';
 import { environments } from '../environments/environments';
 import { routes } from './app.routes';
+import { ConfigService } from './features/settings-wizard/services/config.service';
 
 registerLocaleData(localePt);
 
@@ -27,7 +30,18 @@ export const appConfig: ApplicationConfig = {
 
     // Configurando os "pedaços" do Firebase para o SeniorEase
     provideFirebaseApp(() => initializeApp(environments.firebase)),
-    provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (configService: ConfigService) => () => {
+        // Não precisamos retornar uma Promise aqui porque o seu
+        // serviço usa Signals/Effects internamente.
+        // Só de injetá-lo, o constructor executa.
+        return Promise.resolve();
+      },
+      deps: [ConfigService],
+      multi: true,
+    },
   ],
 };

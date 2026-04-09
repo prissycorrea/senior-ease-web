@@ -20,13 +20,8 @@ export class ThemeSelection {
 
   constructor() {
     effect(() => {
-      // Pegamos o valor do serviço (fonte da verdade)
       const themeFromFirebase = this._configService.userConfig()?.theme;
-
-      // Atualizamos o sinal local APENAS se ele for diferente do que está no serviço
-      // Isso evita qualquer processamento desnecessário
       if (themeFromFirebase && themeFromFirebase !== this.selectedTheme()) {
-        // O untracked (opcional) garante que o effect não observe mudanças no selectedTheme
         untracked(() => this.selectedTheme.set(themeFromFirebase));
       }
     });

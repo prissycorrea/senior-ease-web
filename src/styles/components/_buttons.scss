@@ -30,7 +30,7 @@ button {
     &:disabled {
       cursor: not-allowed;
       border: none;
-      background-color: #eee;
+      background-color: #eee !important;
       color: var(--primary-color-light);
     }
   }
