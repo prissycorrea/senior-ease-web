@@ -23,6 +23,7 @@ export class Dashboard {
   public completedActivitiesInPercent = this._service.completedActivitiesInPercent;
   public tasksPendents = this._service.tasksPendents;
   public tasksCompleted = this._service.tasksCompleted;
+  public readonly today = new Date().toISOString();
 
   get user() {
     return this._authService.user;

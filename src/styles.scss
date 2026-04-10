@@ -1,8 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Theme */
-@use 'theme';
-@use 'vendor';
-@use 'layout/header';
-@use 'components/buttons';
-@use 'components/input';
+@use 'styles/theme';
+@use 'styles/vendor';
+@use 'styles/layout/header';
+@use 'styles/components/buttons';
+@use 'styles/components/input';
+@use 'styles/components/modal';
