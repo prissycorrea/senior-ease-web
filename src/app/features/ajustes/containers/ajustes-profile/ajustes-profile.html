@@ -53,7 +53,7 @@
           class="btn-primary"
           (click)="saveProfile()"
         >
-          {{ loadingProfile() ? 'Salvando...' : 'Salvar Alterações' }}
+          {{ isUpdatingProfile() ? 'Salvando...' : 'Salvar Alterações' }}
         </button>
 
         <div class="w-50">

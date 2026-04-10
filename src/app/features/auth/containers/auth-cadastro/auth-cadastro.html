@@ -1,5 +1,5 @@
 <form [formGroup]="form">
-  <app-custom-stepper [isLinear]="true" (finalizeEmit)="cadastrarUsuario()">
+  <app-custom-stepper [isLinear]="true" (finalizeEmit)="cadastrarUsuario()" [loading]="isRegistering()">
     <cdk-step [stepControl]="form.controls.step1">
       <div formGroupName="step1" class="w-100">
         <app-input

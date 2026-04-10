@@ -1,4 +1,4 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import {
   Auth,
@@ -10,104 +10,106 @@ import {
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
+/**
+ * Serviço responsável pelo gerenciamento de autenticação de usuários.
+ * Lida com login, cadastro, logout e rastreamento do estado do usuário em tempo real.
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private auth = inject(Auth);
-  private router = inject(Router);
+  private readonly auth = inject(Auth);
+  private readonly router = inject(Router);
 
-  // 1. Criamos um Signal que reflete o estado do usuário em tempo real
-  // O 'authState' do Firebase avisa o Angular sempre que o login muda.
-  public user = toSignal(authState(this.auth));
+  // ==========================================================================
+  // SIGNALS DE ESTADO DE AUTENTICAÇÃO
+  // ==========================================================================
 
-  // 2. Signal computado para verificar se está logado (booleano)
-  public isLoggedIn = signal(false);
+  /**
+   * Signal que reflete o estado do usuário logado em tempo real.
+   * Retorna o objeto User do Firebase se logado, ou null se deslogado.
+   */
+  public user = toSignal(authState(this.auth), { initialValue: null });
 
-  public loadingLogout = signal(false);
-  public loadingLogin = signal(false);
-  public loadingRegister = signal(false);
+  /**
+   * Signal computado que retorna um booleano indicando se há um usuário ativo.
+   * Reage automaticamente às mudanças do Signal `user`.
+   */
+  public isLoggedIn = computed(() => !!this.user());
 
-  constructor() {
-    // Efeito colateral simples para atualizar o status
-    authState(this.auth).subscribe((user) => {
-      this.isLoggedIn.set(!!user);
-    });
-  }
+  // ==========================================================================
+  // ESTADOS DE CARREGAMENTO (Loading Indicators)
+  // ==========================================================================
 
-  // --- MÉTODOS DE AÇÃO ---
+  /** Indica se existe uma requisição de login em andamento. */
+  public isLoggingIn = signal(false);
 
-  // Login com E-mail e Senha (Padrão)
-  async login(email: string, pass: string) {
-    this.loadingLogin.set(true);
+  /** Indica se existe uma requisição de cadastro em andamento. */
+  public isRegistering = signal(false);
+
+  /** Indica se existe uma requisição de logout em andamento. */
+  public isLoggingOut = signal(false);
+
+  // ==========================================================================
+  // MÉTODOS DE AÇÃO
+  // ==========================================================================
+
+  /**
+   * Realiza o login do usuário usando E-mail e Senha.
+   * Navega automaticamente para o dashboard em caso de sucesso.
+   * @param email E-mail do usuário.
+   * @param pass Senha do usuário.
+   */
+  async login(email: string, pass: string): Promise<void> {
+    this.isLoggingIn.set(true);
     try {
       await signInWithEmailAndPassword(this.auth, email, pass);
       this.router.navigate(['/dashboard']);
     } catch (error) {
-      console.error('Erro no login:', error);
       throw error;
     } finally {
-      this.loadingLogin.set(false);
+      this.isLoggingIn.set(false);
     }
   }
 
-  // Login com Google (Excelente para idosos pela facilidade)
-  // async loginComGoogle() {
-  //   try {
-  //     const provider = new GoogleAuthProvider();
-  //     await signInWithPopup(this.auth, provider);
-  //     this.router.navigate(['/tarefas']);
-  //   } catch (error) {
-  //     console.error('Erro Google Login:', error);
-  //   }
-  // }
-
-  // Cadastro de novo usuário
-  async cadastrar(username: string, email: string, pass: string) {
-    this.loadingRegister.set(true);
+  /**
+   * Realiza o cadastro de um novo usuário usando E-mail e Senha.
+   * Atualiza o perfil com o nome fornecido e navega para o dashboard.
+   * @param username Nome de exibição do usuário (DisplayName).
+   * @param email E-mail para cadastro.
+   * @param pass Senha para cadastro.
+   */
+  async cadastrar(username: string, email: string, pass: string): Promise<void> {
+    this.isRegistering.set(true);
     try {
-      // 1. Cria a conta no Firebase Auth
       const userCredential = await createUserWithEmailAndPassword(this.auth, email, pass);
-
       const user = userCredential.user;
 
       if (user) {
-        // 2. Vincula o "username" ao perfil do usuário
-        await updateProfile(user, {
-          displayName: username,
-        });
-
-        // 3. Atualiza o estado local para o Angular "perceber" o nome novo imediatamente
+        await updateProfile(user, { displayName: username });
         await user.reload();
-
-        console.log('Usuário cadastrado com sucesso:', user.displayName);
-
-        // 4. Navega para a dashboard do SeniorEase
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['/dashboard']);
       }
-    } catch (error: any) {
-      // Tratamento de erros comum no Firebase
-      if (error.code === 'auth/email-already-in-use') {
-        alert('Este e-mail já está cadastrado.');
-      } else {
-        console.error('Erro ao cadastrar:', error.message);
-      }
+    } catch (error) {
       throw error;
     } finally {
-      this.loadingRegister.set(false);
+      this.isRegistering.set(false);
     }
   }
 
-  // Logout
-  async logout() {
-    this.loadingLogout.set(true);
+  /**
+   * Encerra a sessão do usuário atual no Firebase.
+   * Navega automaticamente para a tela de login.
+   */
+  async logout(): Promise<void> {
+    this.isLoggingOut.set(true);
     try {
       await signOut(this.auth);
-      this.router.navigate(['/autenticacao/login']);
+      this.router.navigate(['/autenticacao']);
     } catch (error) {
-      console.error('Erro no logout:', error);
+      throw error;
     } finally {
-      this.loadingLogout.set(false);
+      this.isLoggingOut.set(false);
     }
   }
 }

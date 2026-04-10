@@ -18,6 +18,8 @@ export class AuthCadastro {
   private _router = inject(Router);
   private _authService = inject(AuthService);
 
+  public isRegistering = this._authService.isRegistering;
+
   public cadastrarUsuario() {
     const { username, email, password } = {
       ...this.form.value.step1,
