@@ -1,0 +1,231 @@
+// Variáveis de cor (Você pode substituir pelas variáveis globais do seu projeto Angular)
+$cor-fundo-tela: #f4f6f8;
+$cor-texto-principal: #333333;
+$cor-texto-secundario: #666666;
+$cor-primaria-azul: #1a237e; // Azul escuro do seu botão "Nova tarefa"
+$cor-sucesso: #2e7d32; // Verde para concluído
+$cor-erro: #c62828; // Vermelho para perdido/não realizado
+$cor-borda: #e0e0e0;
+
+// .agenda-container {
+//   padding: 24px;
+//   background-color: $cor-fundo-tela;
+//   min-height: 100vh;
+// }
+
+// // --- CABEÇALHO E FILTRO ---
+// .agenda-header {
+//   margin-bottom: 32px;
+
+//   h1 {
+//     font-size: 28px;
+//     color: $cor-texto-principal;
+//     margin-bottom: 16px;
+//     font-weight: 600;
+//   }
+
+//   .date-selector {
+//     display: flex;
+//     align-items: center;
+//     gap: 16px;
+
+//     button {
+//       background-color: transparent;
+//       border: 1px solid $cor-borda;
+//       padding: 8px 16px;
+//       border-radius: 20px;
+//       color: $cor-texto-secundario;
+//       cursor: pointer;
+//       font-size: 14px;
+//       transition: all 0.2s ease;
+
+//       &:hover {
+//         background-color: #e9ecef;
+//         color: $cor-texto-principal;
+//       }
+//     }
+
+//     .data-atual {
+//       font-size: 18px;
+//       font-weight: 600;
+//       color: $cor-primaria-azul;
+//     }
+//   }
+// }
+
+// --- LISTA DE TAREFAS ---
+// .task-list {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 16px; // Espaçamento amigável entre os cards
+// }
+
+// --- O CARD DA TAREFA (Estilo inspirado no seu Dashboard) ---
+// .task-card {
+//   display: flex;
+//   align-items: center;
+//   background-color: #ffffff;
+//   padding: 16px 20px;
+//   border-radius: 12px;
+//   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); // Sombra bem leve
+//   transition:
+//     transform 0.2s ease,
+//     box-shadow 0.2s ease;
+//   cursor: pointer;
+//   border-left: 6px solid transparent; // Borda que vai mudar de cor com o status
+
+//   &:hover {
+//     transform: translateY(-2px);
+//     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+//   }
+
+//   // --- ÁREA DO ÍCONE ---
+//   .task-icon {
+//     width: 48px;
+//     height: 48px;
+//     border-radius: 8px;
+//     background-color: $cor-primaria-azul; // Fundo azul escuro dos seus cards
+//     color: #ffffff;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     font-size: 24px;
+//     margin-right: 16px;
+//     flex-shrink: 0;
+//   }
+
+//   // --- TEXTOS DO CARD ---
+//   .task-details {
+//     flex-grow: 1;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+
+//     .time {
+//       font-size: 14px;
+//       color: $cor-texto-secundario;
+//       margin-bottom: 4px;
+//       font-weight: 500;
+//     }
+
+//     h2 {
+//       font-size: 18px;
+//       color: $cor-texto-principal;
+//       margin: 0;
+//       font-weight: 600;
+//     }
+//   }
+
+//   // --- INDICADOR DE STATUS ---
+//   .task-status-badge {
+//     margin-left: 16px;
+//     font-size: 14px;
+//     font-weight: 600;
+//     padding: 6px 12px;
+//     border-radius: 20px;
+//   }
+
+//   // --- CLASSES DINÂMICAS DO ANGULAR [ngClass] ---
+
+//   // Quando a tarefa está concluída
+//   &.status-concluido {
+//     border-left-color: $cor-sucesso;
+
+//     .task-status-badge {
+//       background-color: rgba($cor-sucesso, 0.1);
+//       color: $cor-sucesso;
+//     }
+//   }
+
+//   // Quando a tarefa foi esquecida/perdida
+//   &.status-pendente {
+//     border-left-color: $cor-erro;
+
+//     .task-status-badge {
+//       background-color: rgba($cor-erro, 0.1);
+//       color: $cor-erro;
+//     }
+
+//     // Opcional: deixar o ícone cinza se a tarefa foi perdida
+//     .task-icon {
+//       background-color: #9e9e9e;
+//     }
+//   }
+// }
+
+.date-selector {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-block: 20px;
+  button {
+    background-color: transparent;
+    border: 1px solid $cor-borda;
+    padding: 8px 16px;
+    border-radius: 20px;
+    color: $cor-texto-secundario;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: #e9ecef;
+      color: $cor-texto-principal;
+    }
+  }
+
+  .data-atual {
+    font-size: 18px;
+    font-weight: 600;
+    color: $cor-primaria-azul;
+  }
+}
+
+.card-dashboard {
+  background-color: var(--bg-color);
+  border-radius: 20px;
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  box-shadow: 0 4px 6px -1px rgba(0, 26, 87, 0.1);
+  border-inline-start: 3px;
+  border-left-style: solid;
+  &:hover {
+    transform: translateY(-2px);
+  }
+  &__icon {
+    width: 55px;
+    height: 60px;
+    display: flex;
+    border-radius: 15px;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--info-color);
+    color: var(--bg-color);
+  }
+  &__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  &__actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 55px;
+    height: 100%;
+    border-radius: 15px;
+    cursor: pointer;
+    &:hover {
+      background-color: var(--bg-body);
+    }
+  }
+  &--disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}

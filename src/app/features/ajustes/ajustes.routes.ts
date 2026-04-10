@@ -28,6 +28,11 @@ export const AJUSTES_ROUTES: Routes = [
                 (c) => c.ThemeSelection,
               ),
           },
+          {
+            path: 'perfil',
+            loadComponent: () =>
+              import('./containers/ajustes-profile/ajustes-profile').then((c) => c.AjustesProfile),
+          },
         ],
       },
     ],

@@ -1,0 +1,79 @@
+<div class="d-flex flex-column align-items-start w-100 h-100">
+  <h1 class="my-4 ms-3">Perfil</h1>
+  <div class="d-flex gap-5 mt-5 w-100 overflow-auto">
+    <form [formGroup]="perfilForm" class="w-100 ps-3 pe-5">
+      <div class="form-group">
+        <label>Nome Completo</label>
+        <input type="text" formControlName="name" />
+      </div>
+
+      <div class="form-group disabled">
+        <label>E-mail</label>
+        <input type="email" formControlName="email" readonly />
+      </div>
+      <div class="form-group">
+        <label>Nova Senha</label>
+        <div class="password-wrapper" style="position: relative">
+          <input
+            [type]="hidePassword() ? 'password' : 'text'"
+            formControlName="password"
+            placeholder="No mínimo 6 caracteres"
+          />
+          <button type="button" (click)="togglePassword()" class="btn-toggle">
+            @if (hidePassword()) {
+              <i class="fa-regular fa-eye"></i>
+            } @else {
+              <i class="fa-regular fa-eye-slash"></i>
+            }
+          </button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Confirmar Nova Senha</label>
+        <div class="password-wrapper" style="position: relative">
+          <input
+            [type]="hideConfirmPassword() ? 'password' : 'text'"
+            formControlName="confirmPassword"
+          />
+          <button type="button" (click)="toggleConfirmPassword()" class="btn-toggle">
+            @if (hideConfirmPassword()) {
+              <i class="fa-regular fa-eye"></i>
+            } @else {
+              <i class="fa-regular fa-eye-slash"></i>
+            }
+          </button>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button
+          type="submit"
+          [disabled]="perfilForm.invalid"
+          class="btn-primary"
+          (click)="saveProfile()"
+        >
+          {{ loadingProfile() ? 'Salvando...' : 'Salvar Alterações' }}
+        </button>
+
+        <div class="w-50">
+          @if (
+            perfilForm.errors?.['passwordMismatch'] && perfilForm.get('confirmPassword')?.dirty
+          ) {
+            <div class="alert alert-danger" role="alert">As senhas não coincidem.</div>
+          }
+
+          @if (messageError()) {
+            <div class="alert alert-danger" role="alert">{{ messageError() }}</div>
+          }
+
+          @if (messageSuccess()) {
+            <div class="alert alert-success" role="alert">
+              {{ messageSuccess() }}
+            </div>
+          }
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

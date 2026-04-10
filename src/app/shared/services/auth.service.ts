@@ -19,10 +19,14 @@ export class AuthService {
 
   // 1. Criamos um Signal que reflete o estado do usuário em tempo real
   // O 'authState' do Firebase avisa o Angular sempre que o login muda.
-  user = toSignal(authState(this.auth));
+  public user = toSignal(authState(this.auth));
 
   // 2. Signal computado para verificar se está logado (booleano)
-  isLoggedIn = signal(false);
+  public isLoggedIn = signal(false);
+
+  public loadingLogout = signal(false);
+  public loadingLogin = signal(false);
+  public loadingRegister = signal(false);
 
   constructor() {
     // Efeito colateral simples para atualizar o status
@@ -35,12 +39,15 @@ export class AuthService {
 
   // Login com E-mail e Senha (Padrão)
   async login(email: string, pass: string) {
+    this.loadingLogin.set(true);
     try {
       await signInWithEmailAndPassword(this.auth, email, pass);
       this.router.navigate(['/dashboard']);
     } catch (error) {
       console.error('Erro no login:', error);
       throw error;
+    } finally {
+      this.loadingLogin.set(false);
     }
   }
 
@@ -57,6 +64,7 @@ export class AuthService {
 
   // Cadastro de novo usuário
   async cadastrar(username: string, email: string, pass: string) {
+    this.loadingRegister.set(true);
     try {
       // 1. Cria a conta no Firebase Auth
       const userCredential = await createUserWithEmailAndPassword(this.auth, email, pass);
@@ -85,12 +93,21 @@ export class AuthService {
         console.error('Erro ao cadastrar:', error.message);
       }
       throw error;
+    } finally {
+      this.loadingRegister.set(false);
     }
   }
 
   // Logout
   async logout() {
-    await signOut(this.auth);
-    this.router.navigate(['/autenticacao/login']);
+    this.loadingLogout.set(true);
+    try {
+      await signOut(this.auth);
+      this.router.navigate(['/autenticacao/login']);
+    } catch (error) {
+      console.error('Erro no logout:', error);
+    } finally {
+      this.loadingLogout.set(false);
+    }
   }
 }

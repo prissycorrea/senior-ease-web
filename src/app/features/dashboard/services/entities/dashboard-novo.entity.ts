@@ -6,3 +6,10 @@ export interface Task {
   createdAt: Date;
   userId?: string;
 }
+
+export interface GroupTasks {
+  date: string;
+  tasks: Task[];
+}
+
+export type ViewMode = 'dia' | 'semana' | 'mes';

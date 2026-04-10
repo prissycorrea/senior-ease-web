@@ -1,0 +1,111 @@
+<app-wrapper-card [noHeader]="true">
+  <div class="w-100 h-100 overflow-auto">
+    <h1>Meu Histórico</h1>
+    <div class="date-selector">
+      <button [class.data-atual]="viewMode() === 'dia'" (click)="mudarModo('dia')">Dia</button>
+      <button [class.data-atual]="viewMode() === 'semana'" (click)="mudarModo('semana')">
+        Semana
+      </button>
+      <button [class.data-atual]="viewMode() === 'mes'" (click)="mudarModo('mes')">Mês</button>
+    </div>
+
+    <div class="task-list">
+      @for (task of groupTasks(); track task.date) {
+        <p class="text-muted my-3">{{ task.date | date: 'dd/MM/yyyy' }}</p>
+
+        <div class="d-flex flex-column gap-3">
+          @for (task of task.tasks; track task.id) {
+            <div
+              class="card-dashboard"
+              [class.border-success]="task.completed"
+              [class.border-danger]="!task.completed && task.period < today"
+              [class.border-warning]="!task.completed && task.period > today"
+            >
+              <div class="card-dashboard__icon">
+                <i class="fa-solid fa-prescription-bottle-medical"></i>
+              </div>
+              <div class="card-dashboard__content">
+                <h5>{{ task.task }}</h5>
+                <p><i class="fa-regular fa-clock"></i>{{ task.period | date: 'HH:mm' }}</p>
+              </div>
+              <div class="card-dashboard__actions">
+                @if (task.completed) {
+                  <i class="py-3 fa-solid fa-circle-check text-success"></i>
+                }
+                @if (!task.completed && task.period > today) {
+                  <i class="py-3 fa-solid fa-clock text-warning"></i>
+                }
+                @if (!task.completed && task.period < today) {
+                  <i class="py-3 fa-solid fa-circle-xmark text-danger"></i>
+                }
+              </div>
+            </div>
+          }
+        </div>
+        <!-- <div
+          class="task-card"
+          [ngClass]="{
+            'status-concluido': task.status === 'done',
+            'status-pendente': task.status === 'missed',
+          }"
+        >
+          <div class="task-icon">
+            <i class="icon-{{ task.tipo }}"></i>
+          </div>
+
+          <div class="task-details">
+            <span class="time">{{ task.horario }}</span>
+            <h2>{{ task.titulo }}</h2>
+          </div>
+
+          <div class="task-status-badge">
+            <span>
+              @if (task.status === 'done') {
+                ✅ Concluído
+              }
+              @if (task.status === 'missed') {
+                ❌ Não realizado
+              }
+            </span>
+          </div>
+        </div> -->
+      }
+    </div>
+  </div>
+</app-wrapper-card>
+<!--
+<div class="agenda-container">
+  <header class="agenda-header"></header>
+
+  <main class="task-list">
+    @for (task of tarefas; track task.id) {
+      <div
+        class="task-card"
+        [ngClass]="{
+          'status-concluido': task.status === 'done',
+          'status-pendente': task.status === 'missed',
+        }"
+      >
+        <div class="task-icon">
+          <i class="icon-{{ task.tipo }}"></i>
+        </div>
+
+        <div class="task-details">
+          <span class="time">{{ task.horario }}</span>
+          <h2>{{ task.titulo }}</h2>
+        </div>
+
+        <div class="task-status-badge">
+          <span>
+            @if (task.status === 'done') {
+              ✅ Concluído
+            }
+            @if (task.status === 'missed') {
+              ❌ Não realizado
+            }
+          </span>
+        </div>
+      </div>
+    }
+  </main>
+</div> -->
