@@ -19,7 +19,7 @@ export class Dashboard {
   private readonly _authService = inject(AuthService);
   private readonly _service = inject(TaskService);
 
-  public tasks = this._service.tasks;
+  public tasks = this._service.todayTasks;
   public completedActivitiesInPercent = this._service.completedActivitiesInPercent;
   public tasksPendents = this._service.tasksPendents;
   public tasksCompleted = this._service.tasksCompleted;

@@ -20,6 +20,13 @@ export const SIDEMENU_ROUTES: Routes = [
         loadChildren: () =>
           import('../../features/ajustes/ajustes.routes').then((r) => r.AJUSTES_ROUTES),
       },
+      {
+        path: 'agenda',
+        loadComponent: () =>
+          import('../../features/agenda/containers/agenda-index/agenda-index').then(
+            (r) => r.AgendaIndex,
+          ),
+      },
     ],
   },
 ];

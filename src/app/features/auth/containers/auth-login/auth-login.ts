@@ -11,6 +11,6 @@ export class AuthLogin {
   private _authService = inject(AuthService);
 
   constructor() {
-    this._authService.login('jcmagalhaes301@gmail.com', '123456123');
+    this._authService.login('jcmagalhaes301+dev1@gmail.com', '123456');
   }
 }
