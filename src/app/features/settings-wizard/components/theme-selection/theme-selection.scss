@@ -1,60 +1,69 @@
 :host {
   width: 100%;
+  display: block;
+
   .dark-theme {
     --bg-card: #1e1e1e;
     --color-card: #ffffff;
     --icon-card: #4da6ff;
   }
+
   .theme-selection {
     &__options {
       display: flex;
-      gap: 12px;
+      gap: 16px; // Aumentado para melhor separação
       font-family: 'Inter', sans-serif;
       justify-content: center;
+      width: 100%;
     }
 
     &__card {
       background-color: var(--bg-card, #ffffff);
-      width: 40%;
+      width: 45%; // Desktop: dois lado a lado
       max-width: 450px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 16px;
-      border: 3px solid #e2e8f0; /* Cinza suave */
+      padding: 24px; // Aumentado para melhor respiro
+      border: 3px solid #e2e8f0;
       border-radius: 20px;
       cursor: pointer;
       transition: all 0.2s ease-in-out;
       position: relative;
+
       &.active {
         border-color: var(--icon-card, var(--primary-icon-color));
-        // background-color: #f8fafc;
-        box-shadow: 0 4px 6px -1px rgba(0, 26, 87, 0.1);
+        box-shadow: 0 8px 15px -3px rgba(0, 26, 87, 0.1);
+        transform: translateY(-2px);
       }
     }
+
     &__header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
 
       input[type='radio'] {
         display: none;
       }
       &-label {
-        font-weight: 600;
+        font-weight: 700;
+        font-size: 1.1rem;
         color: var(--color-card, #1e293b);
       }
     }
+
     &__content {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 30px;
+      gap: 20px;
       width: 100%;
+
       i {
-        font-size: 60px;
+        font-size: 50px; // Ajuste leve para equilibrar no mobile
         color: var(--icon-card, var(--primary-icon-color));
       }
     }
@@ -64,39 +73,63 @@
     display: block;
     font-weight: 600;
     color: #1e293b;
+    margin-bottom: 8px;
   }
 
   .description {
     background-color: #d9d9d9;
     padding: 15px;
-    border-radius: 20px;
-    width: calc(100% - 30px);
+    border-radius: 15px;
+    width: 100%;
+    font-size: 0.9rem;
+    color: #333;
   }
 
-  /* O círculo customizado */
+  /* Círculo customizado (Aumentado para acessibilidade) */
   .custom-check {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     border: 2px solid;
     border-color: var(--icon-card, var(--primary-icon-color));
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s;
   }
 
-  .active .custom-check {
-    // border-color: #001a57;
-    border-color: var(--icon-card, var(--primary-icon-color));
-  }
-
-  /* O "pingo" dentro do círculo quando ativo */
   .active .custom-check::after {
     content: '';
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     background-color: var(--icon-card, var(--primary-icon-color));
     border-radius: 50%;
+  }
+
+  // ==========================================
+  // RESPONSIVO (MOBILE)
+  // ==========================================
+  @media (max-width: 768px) {
+    .theme-selection {
+      &__options {
+        flex-direction: column; // Cards um embaixo do outro
+        align-items: center;
+      }
+
+      &__card {
+        width: 100%; // Ocupa a largura total disponível
+        max-width: none;
+        padding: 20px;
+      }
+
+      &__content {
+        i {
+          font-size: 40px;
+        }
+
+        .description {
+          flex: 1;
+        }
+      }
+    }
   }
 }

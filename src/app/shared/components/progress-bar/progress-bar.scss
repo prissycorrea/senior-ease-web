@@ -2,8 +2,49 @@
   background-color: var(--bg-color);
   border-radius: 20px;
   padding: 20px;
-  flex: 1;
+  flex: 1; // Mantém o crescimento no desktop
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px; // Aumentado levemente para clareza visual
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+  // Estilos internos sugeridos (caso você use uma div interna para o preenchimento)
+  &__track {
+    width: 100%;
+    height: 12px;
+    background-color: var(--bg-body);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  &__fill {
+    height: 100%;
+    background-color: var(--primary-color);
+    transition: width 0.5s ease-out;
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    color: var(--text-color);
+  }
+
+  // ==========================================
+  // RESPONSIVO (MOBILE)
+  // ==========================================
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 15px;
+    flex: none; // No mobile, ela deixa de tentar dividir espaço lateralmente
+
+    &__info {
+      font-size: 0.9rem; // Ajuste para telas menores
+    }
+
+    &__track {
+      height: 16px; // Barra um pouco mais grossa no mobile para melhor visibilidade
+    }
+  }
 }
