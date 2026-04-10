@@ -2,40 +2,99 @@
   position: fixed;
   top: 20px;
   right: 20px;
-  z-index: 9999;
+  z-index: 10001; // Garantindo que fique acima do SideMenu mobile (z-index 1000)
   min-width: 300px;
+  max-width: 400px;
   padding: 16px;
-  border-radius: 8px;
+  border-radius: 12px; // Arredondamento levemente maior para combinar com seus cards
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   animation: slideIn 0.3s ease-out;
   color: white;
 
-  &.success { background-color: #2e7d32; }
-  &.error { background-color: #d32f2f; }
-  &.warning { background-color: #ffa000; }
+  &.success {
+    background-color: #2e7d32;
+  }
+  &.error {
+    background-color: #d32f2f;
+  }
+  &.warning {
+    background-color: #ffa000;
+  }
 
   .toast-content {
     display: flex;
     align-items: center;
     gap: 12px;
-    font-weight: 500;
+    font-weight: 600; // Um pouco mais de peso para leitura sênior
+    font-size: 1rem;
+
+    i {
+      font-size: 1.2rem;
+    }
   }
 
   .close-btn {
     background: none;
     border: none;
     color: white;
-    font-size: 20px;
+    font-size: 24px; // Aumentado para facilitar o toque
+    padding: 0 10px;
     cursor: pointer;
     opacity: 0.8;
-    &:hover { opacity: 1; }
+    &:hover {
+      opacity: 1;
+    }
   }
 }
 
+// Animação para desktop (vem da direita)
 @keyframes slideIn {
-  from { transform: translateX(100%); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+// Animação para mobile (vem de cima)
+@keyframes slideInMobile {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+// ==========================================
+// RESPONSIVO (MOBILE)
+// ==========================================
+@media (max-width: 768px) {
+  .toast-container {
+    top: 10px;
+    right: 10px;
+    left: 10px; // Estica o toast horizontalmente
+    min-width: 0;
+    max-width: none;
+    width: auto;
+    animation: slideInMobile 0.4s ease-out;
+    padding: 18px; // Mais respiro interno
+
+    .toast-content {
+      font-size: 0.95rem;
+      flex: 1;
+    }
+
+    .close-btn {
+      margin-left: 10px;
+    }
+  }
 }

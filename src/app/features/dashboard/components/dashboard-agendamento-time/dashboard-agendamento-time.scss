@@ -2,15 +2,66 @@
   &__menu {
     max-height: 300px;
     overflow-y: auto;
-    border: 2px solid #000; // Alto contraste para idosos
+    background-color: var(--bg-color);
+    border: 2px solid #000; // Mantendo seu alto contraste
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    // Personalização da scrollbar para facilitar a visualização
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 10px;
+    }
   }
+
   &__item {
-    min-height: 44px;
+    min-height: 52px; // Aumentado de 44px para 52px (melhor para dedos)
+    padding-inline: 20px;
     display: flex;
     align-items: center;
+    font-size: 1.1rem; // Fonte levemente maior
+    border-bottom: 1px solid #eee; // Linha divisória para separar os horários
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
     &:hover {
-      background-color: #0d6efd;
+      background-color: var(--primary-color);
       color: white;
+    }
+
+    &:active {
+      background-color: var(--primary-color-hover);
+    }
+  }
+
+  // ==========================================
+  // RESPONSIVO (MOBILE)
+  // ==========================================
+  @media (max-width: 768px) {
+    &__menu {
+      max-height: 250px; // Um pouco menor para não cobrir o teclado ou a tela toda
+      border-width: 3px; // Reforça o contraste no mobile
+    }
+
+    &__item {
+      min-height: 60px; // Horários bem grandes no celular
+      font-size: 1.2rem;
+      font-weight: 500;
+
+      // Indicador visual de que o item é clicável
+      &::after {
+        content: '\203A'; // Adiciona um pequeno '>' no final
+        margin-left: auto;
+        font-size: 1.5rem;
+        opacity: 0.3;
+      }
     }
   }
 }

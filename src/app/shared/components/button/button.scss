@@ -7,35 +7,87 @@
 }
 
 button {
+  // Reset básico para garantir consistência
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+
   &.circle {
     border-radius: 50%;
     padding: 20px;
+    min-width: 60px; // Garante uma área de toque mínima
+    min-height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: large;
+    font-size: 1.2rem; // Mais legível que 'large'
     font-weight: bold;
     color: white;
-    border: none;
     position: relative;
     transition: all 0.3s ease;
+
+    // Evita que o ícone interno amasse
+    i {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &:active {
+      transform: scale(0.95); // Feedback de clique físico
+    }
   }
+
   &.pulsing {
     animation: pulse-sonar 2s infinite;
   }
 }
 
-// Definição da animação
+// Animação otimizada para performance
 @keyframes pulse-sonar {
   0% {
-    box-shadow: 0 0 0 0 #42a9b3;
+    box-shadow: 0 0 0 0 rgba(66, 169, 179, 0.7);
   }
-  50% {
+  70% {
     box-shadow:
-      0 0 0 10px #98dde4,
-      0 0 0 20px rgba(220, 245, 247, 0.7);
+      0 0 0 10px rgba(152, 221, 228, 0.4),
+      0 0 0 20px rgba(220, 245, 247, 0);
   }
   100% {
-    box-shadow: 0 0 0 0 #42a9b3;
+    box-shadow: 0 0 0 0 rgba(66, 169, 179, 0);
+  }
+}
+
+// ==========================================
+// RESPONSIVO (MOBILE)
+// ==========================================
+@media (max-width: 768px) {
+  button {
+    &.circle {
+      min-width: 64px; // Um pouco maior no mobile para o polegar
+      min-height: 64px;
+      padding: 15px;
+      font-size: 1.4rem; // Ícone maior para facilitar a identificação
+
+      // Se o botão pulsing estiver muito perto da borda,
+      // reduzimos o raio da animação para não criar scroll lateral
+      &.pulsing {
+        animation-name: pulse-sonar-mobile;
+      }
+    }
+  }
+}
+
+@keyframes pulse-sonar-mobile {
+  0% {
+    box-shadow: 0 0 0 0 rgba(66, 169, 179, 0.7);
+  }
+  70% {
+    box-shadow:
+      0 0 0 8px rgba(152, 221, 228, 0.4),
+      0 0 0 15px rgba(220, 245, 247, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(66, 169, 179, 0);
   }
 }

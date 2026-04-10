@@ -1,13 +1,17 @@
 .wrapper-card {
   display: flex;
   flex-direction: column;
+  min-height: 100vh; // Garante que o wrapper ocupe a altura toda
+
   &__content {
     width: 100%;
+    // Altura dinâmica: 100vh menos a altura do sidemenu (64px no desktop)
     height: var(--height, calc(100vh - 64px));
     display: flex;
     justify-content: center;
     align-items: center;
   }
+
   &__container {
     background-color: var(--bg-color);
     border-radius: 20px;
@@ -18,5 +22,27 @@
     width: 80%;
     height: 80%;
     padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  }
+
+  // ==========================================
+  // RESPONSIVO (MOBILE)
+  // ==========================================
+  @media (max-width: 768px) {
+    &__content {
+      // No mobile, muitas vezes o conteúdo precisa rolar se o teclado abrir
+      height: auto;
+      min-height: calc(100vh - 80px); // Descontando o menu inferior mobile
+      padding-block: 20px;
+    }
+
+    &__container {
+      width: 95%;  // Quase a tela cheia
+      height: auto; // Deixa a altura crescer conforme o conteúdo (evita overflow)
+      min-height: 70vh;
+      border-radius: 15px; // Arredondamento um pouco menor para telas menores
+      padding: 15px;
+      justify-content: flex-start; // Alinha itens no topo se o conteúdo for longo
+    }
   }
 }

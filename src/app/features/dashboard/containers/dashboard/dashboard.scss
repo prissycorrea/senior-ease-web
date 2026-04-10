@@ -1,18 +1,22 @@
 .card-dashboard {
-  width: 32%;
+  width: 32%; // Desktop: 3 por linha
   background-color: var(--bg-color);
   border-radius: 20px;
   padding: 25px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px; // Aumentado levemente para melhor respiro
   cursor: pointer;
   transition: .3s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); // Sombra leve padrão
+
   &:hover {
-    box-shadow: 0 4px 6px -1px rgba(0, 26, 87, 0.1);
+    box-shadow: 0 10px 15px -3px rgba(0, 26, 87, 0.1);
+    transform: translateY(-2px);
   }
+
   &__icon {
-    width: 55px;
+    width: 60px;
     height: 60px;
     display: flex;
     border-radius: 15px;
@@ -20,27 +24,70 @@
     justify-content: center;
     background-color: var(--info-color);
     color: var(--bg-color);
+    flex-shrink: 0; // Impede o ícone de amassar no mobile
+    font-size: 1.5rem;
   }
+
   &__content {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
+
+    span {
+      font-size: 0.9rem;
+      color: var(--text-color-light);
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      margin: 0;
+      color: var(--text-color);
+    }
   }
+
   &__actions {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 55px;
-    height: 100%;
-    border-radius: 15px;
+    width: 48px; // Tamanho ideal para toque
+    height: 48px;
+    border-radius: 12px;
     cursor: pointer;
+    transition: background 0.2s;
+
     &:hover {
       background-color: var(--bg-body);
     }
   }
+
   &--disabled {
     opacity: 0.5;
     pointer-events: none;
+  }
+
+  // ==========================================
+  // RESPONSIVO (MOBILE)
+  // ==========================================
+  @media (max-width: 1024px) {
+    width: 48%; // Tablets: 2 por linha
+  }
+
+  @media (max-width: 768px) {
+    width: 100%; // Mobile: 1 por linha (empilhados)
+    padding: 20px;
+    gap: 12px;
+
+    &__icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+    }
+
+    &__content {
+      h3 {
+        font-size: 1rem; // Ajuste fino para não quebrar linha em nomes longos
+      }
+    }
   }
 }
