@@ -9,6 +9,7 @@ import {
   updateProfile,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { MessageService } from '../components/toaster/toaster.service';
 
 /**
  * Serviço responsável pelo gerenciamento de autenticação de usuários.
@@ -20,6 +21,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   private readonly auth = inject(Auth);
   private readonly router = inject(Router);
+  private readonly _message = inject(MessageService);
 
   // ==========================================================================
   // SIGNALS DE ESTADO DE AUTENTICAÇÃO
@@ -66,6 +68,7 @@ export class AuthService {
       await signInWithEmailAndPassword(this.auth, email, pass);
       this.router.navigate(['/dashboard']);
     } catch (error) {
+      this._message.error(error);
       throw error;
     } finally {
       this.isLoggingIn.set(false);
@@ -91,6 +94,7 @@ export class AuthService {
         this.router.navigate(['/dashboard']);
       }
     } catch (error) {
+      this._message.error(error);
       throw error;
     } finally {
       this.isRegistering.set(false);
@@ -107,6 +111,7 @@ export class AuthService {
       await signOut(this.auth);
       this.router.navigate(['/autenticacao']);
     } catch (error) {
+      this._message.error(error);
       throw error;
     } finally {
       this.isLoggingOut.set(false);

@@ -3,6 +3,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { Auth, updatePassword, updateProfile, user } from '@angular/fire/auth';
 import { doc, docData, Firestore, setDoc } from '@angular/fire/firestore';
 import { map, Observable, of, switchMap } from 'rxjs';
+import { MessageService } from '../../../shared/components/toaster/toaster.service';
 import { UserProfile } from './entities/profile.entity';
 
 /**
@@ -16,6 +17,7 @@ export class ProfileService {
   private readonly _firestore = inject(Firestore);
   private readonly _auth = inject(Auth);
   private readonly _injector = inject(Injector);
+  private readonly _message = inject(MessageService);
   private readonly _collection = 'profiles';
 
   /** Observable do usuário atualmente logado no Firebase Auth. */
@@ -98,7 +100,10 @@ export class ProfileService {
           photoURL: data.photoURL || currentUser.photoURL,
         });
       }
+
+      this._message.success('Perfil atualizado com sucesso!');
     } catch (error) {
+      this._message.error(error);
       throw error;
     } finally {
       this.isUpdatingProfile.set(false);
@@ -118,7 +123,9 @@ export class ProfileService {
 
     try {
       await updatePassword(currentUser, newPassword);
+      this._message.success('Senha alterada com sucesso!');
     } catch (error) {
+      this._message.error(error);
       throw error;
     } finally {
       this.isChangingPassword.set(false);

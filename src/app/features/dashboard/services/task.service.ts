@@ -1,4 +1,12 @@
-import { computed, inject, Injectable, Injector, Signal, signal } from '@angular/core';
+import {
+  computed,
+  inject,
+  Injectable,
+  Injector,
+  runInInjectionContext,
+  Signal,
+  signal,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Auth, user } from '@angular/fire/auth';
 import {
@@ -14,7 +22,7 @@ import {
   where,
 } from '@angular/fire/firestore';
 import { Observable, of, switchMap } from 'rxjs';
-import { runInInjectionContext } from '@angular/core';
+import { MessageService } from '../../../shared/components/toaster/toaster.service';
 import { GroupTasks, Task, ViewMode } from './entities/dashboard-novo.entity';
 
 /**
@@ -28,7 +36,8 @@ import { GroupTasks, Task, ViewMode } from './entities/dashboard-novo.entity';
 export class TaskService {
   private readonly _firestore = inject(Firestore);
   private readonly _auth = inject(Auth);
-  private readonly injector = inject(Injector);
+  private readonly _injector = inject(Injector);
+  private readonly _message = inject(MessageService);
   private readonly _collection = 'tasks';
 
   /** * Observable do usuário atualmente logado no Firebase Auth.
@@ -115,8 +124,7 @@ export class TaskService {
         return taskDate >= inicioSemana && taskDate <= fimSemana;
       } else if (mode === 'mes') {
         return (
-          taskDate.getMonth() === hoje.getMonth() &&
-          taskDate.getFullYear() === hoje.getFullYear()
+          taskDate.getMonth() === hoje.getMonth() && taskDate.getFullYear() === hoje.getFullYear()
         );
       }
       return false;
@@ -184,11 +192,15 @@ export class TaskService {
     this.isCreating.set(true);
     try {
       const tasksRef = collection(this._firestore, this._collection);
+
       return await addDoc(tasksRef, {
         ...task,
         userId: currentUser.uid,
         createdAt: new Date(),
       });
+    } catch (error) {
+      this._message.error(error);
+      throw error;
     } finally {
       this.isCreating.set(false);
     }
@@ -201,13 +213,9 @@ export class TaskService {
    * @returns Observable com a lista de tarefas ordenada pela criação.
    */
   getTasks(userId: string): Observable<Task[]> {
-    return runInInjectionContext(this.injector, () => {
+    return runInInjectionContext(this._injector, () => {
       const tasksRef = collection(this._firestore, this._collection);
-      const q = query(
-        tasksRef,
-        where('userId', '==', userId),
-        orderBy('createdAt', 'desc')
-      );
+      const q = query(tasksRef, where('userId', '==', userId), orderBy('createdAt', 'desc'));
       return collectionData(q, { idField: 'id' }) as Observable<Task[]>;
     });
   }
@@ -219,12 +227,28 @@ export class TaskService {
    * @returns Observable com a lista de tarefas do dia.
    */
   public getTodayTasks(userId: string): Observable<any[]> {
-    return runInInjectionContext(this.injector, () => {
+    return runInInjectionContext(this._injector, () => {
       const tasksRef = collection(this._firestore, this._collection);
       const now = new Date();
 
-      const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0).toISOString();
-      const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999).toISOString();
+      const startOfDay = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate(),
+        0,
+        0,
+        0,
+        0,
+      ).toISOString();
+      const endOfDay = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate(),
+        23,
+        59,
+        59,
+        999,
+      ).toISOString();
 
       const q = query(
         tasksRef,
@@ -247,6 +271,7 @@ export class TaskService {
     this.isUpdating.set(true);
     try {
       const taskDocRef = doc(this._firestore, `${this._collection}/${taskId}`);
+      this._message.success('Tarefa atualizada com sucesso!');
       return updateDoc(taskDocRef, data);
     } finally {
       this.isUpdating.set(false);
@@ -261,7 +286,11 @@ export class TaskService {
     this.isDeleting.set(true);
     try {
       const taskDocRef = doc(this._firestore, `${this._collection}/${taskId}`);
+      this._message.success('Tarefa removida com sucesso!');
       return deleteDoc(taskDocRef);
+    } catch (error) {
+      this._message.error(error);
+      throw error;
     } finally {
       this.isDeleting.set(false);
     }

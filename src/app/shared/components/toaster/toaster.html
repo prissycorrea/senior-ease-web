@@ -1,0 +1,13 @@
+<div *ngIf="messageService.currentMessage() as msg"
+     class="toast-container"
+     [ngClass]="msg.type">
+  <div class="toast-content">
+    <i class="pi" [ngClass]="{
+      'pi-check-circle': msg.type === 'success',
+      'pi-times-circle': msg.type === 'error',
+      'pi-exclamation-triangle': msg.type === 'warning'
+    }"></i>
+    <span>{{ msg.text }}</span>
+  </div>
+  <button (click)="messageService.clear()" class="close-btn">&times;</button>
+</div>
