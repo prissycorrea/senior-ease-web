@@ -7,14 +7,22 @@
     @for (task of tasks(); track task.id) {
       <div class="card-dashboard" [class.card-dashboard--disabled]="task.completed">
         <div class="card-dashboard__icon">
-          <i class="fa-solid fa-prescription-bottle-medical"></i>
+          <i class="fa-solid fa-list-check"></i>
         </div>
         <div class="card-dashboard__content">
           <h5>{{ task.task }}</h5>
-          <p><i class="fa-regular fa-clock"></i>{{ task.period | date: 'HH:mm'}}</p>
+          <p><i class="fa-regular fa-clock"></i>{{ task.period | date: 'HH:mm' }}</p>
         </div>
         <div class="card-dashboard__actions" (click)="markActivityAsCompleted(task)">
-          <i class="fa-solid fa-angle-right"></i>
+          @if (task.completed) {
+            <i class="py-3 fa-solid fa-circle-check text-success"></i>
+          }
+          @if (!task.completed && task.period != today) {
+            <i class="py-3 fa-solid fa-clock text-warning"></i>
+          }
+          @if (!task.completed && task.period > today) {
+            <i class="py-3 fa-solid fa-circle-xmark text-danger"></i>
+          }
         </div>
       </div>
     }
@@ -25,7 +33,7 @@
   <div class="d-flex flex-wrap gap-5 my-5">
     <div class="card-dashboard">
       <div class="card-dashboard__icon">
-        <i class="fa-solid fa-prescription-bottle-medical"></i>
+        <i class="py-3 fa-solid fa-clock text-warning"></i>
       </div>
       <div class="card-dashboard__content">
         <h5>{{ tasksPendents() }}</h5>
@@ -34,10 +42,10 @@
     </div>
     <div class="card-dashboard">
       <div class="card-dashboard__icon">
-        <i class="fa-solid fa-prescription-bottle-medical"></i>
+        <i class="py-3 fa-solid fa-circle-check text-success"></i>
       </div>
       <div class="card-dashboard__content">
-        <h5>{{ tasksCompleted()  }}</h5>
+        <h5>{{ tasksCompleted() }}</h5>
         <p>Atividades concluída</p>
       </div>
     </div>

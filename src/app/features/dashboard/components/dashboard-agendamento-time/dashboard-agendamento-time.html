@@ -1,29 +1,41 @@
 <div class="p-5">
   <div class="text-center mb-5">
-    <h1>Horario da tarefa</h1>
+    <h1 class="text-xl font-bold">Horário da tarefa</h1>
   </div>
 
-  <div class="dropdown-timer dropdown">
-    <button
-      class="btn btn-secondary dropdown-toggle w-100"
-      type="button"
-      data-bs-toggle="dropdown"
-      aria-expanded="false"
-    >
-      {{ horarioSelecionado() || 'Escolha o horario da tarefa' }}
-    </button>
-    <ul class="dropdown-menu dropdown-timer__menu">
-      @for (item of horarios(); track $index) {
-        <li
-          class="dropdown-item dropdown-timer__item"
-          [class.active]="horarioSelecionado() === item"
-          (click)="selecionar(item)"
-        >
-          {{ item }}
-        </li>
-      }
-    </ul>
+  <div class="d-flex gap-3 justify-content-center align-items-center mb-5">
+    <div class="text-center w-100">
+      <small class="text-muted d-block mb-1">Hora</small>
+      <select
+        [ngModel]="horaSelecionada()"
+        (ngModelChange)="horaSelecionada.set($event)"
+        class="form-select form-select-lg"
+      >
+        @for (hora of listaHoras; track hora) {
+          <option [value]="hora">{{ hora }}</option>
+        }
+      </select>
+    </div>
+
+    <span class="fs-2 mt-3">:</span>
+
+    <div class="text-center w-100">
+      <small class="text-muted d-block mb-1">Minutos</small>
+      <select
+        [ngModel]="minutoSelecionado()"
+        (ngModelChange)="minutoSelecionado.set($event)"
+        class="form-select form-select-lg"
+      >
+        @for (min of listaMinutos; track min) {
+          <option [value]="min">{{ min }}</option>
+        }
+      </select>
+    </div>
   </div>
 
-  <app-button label="Confirmar horário" (click)="salvarHorario()" />
+  <div class="alert alert-light text-center mb-4">
+    Agendado para: <strong>{{ horarioFormatado() }}</strong>
+  </div>
+
+  <app-button class="w-100" label="Confirmar horário" (click)="salvarHorario()" />
 </div>

@@ -35,7 +35,6 @@ export class DashboardAgendamento implements ControlValueAccessor {
   constructor() {
     effect(() => {
       this.onChanged(this._dataSelecionada());
-      // this._dialog.open(DashboardAgendamento);
     });
   }
 
@@ -73,7 +72,12 @@ export class DashboardAgendamento implements ControlValueAccessor {
   }
 
   selecionar(dia: DiaAgendamento) {
-    const dialogRef = this._dialog.open(DashboardAgendamentoTime);
+    const dialogRef = this._dialog.open(DashboardAgendamentoTime, {
+      minWidth: '40vw',
+      minHeight: '40vw',
+      disableClose: true,
+      autoFocus: true,
+    });
 
     dialogRef.afterClosed().subscribe((horario: string) => {
       const data = dia.data.toISOString().split('T')[0];

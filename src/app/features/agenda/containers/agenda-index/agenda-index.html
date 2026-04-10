@@ -11,7 +11,7 @@
 
     <div class="task-list">
       @for (task of groupTasks(); track task.date) {
-        <p class="text-muted my-3">{{ task.date | date: 'dd/MM/yyyy' }}</p>
+        <p class="text-muted my-3">{{ task.date }}</p>
 
         <div class="d-flex flex-column gap-3">
           @for (task of task.tasks; track task.id) {
@@ -22,7 +22,7 @@
               [class.border-warning]="!task.completed && task.period > today"
             >
               <div class="card-dashboard__icon">
-                <i class="fa-solid fa-prescription-bottle-medical"></i>
+                <i class="fa-solid fa-list-check"></i>
               </div>
               <div class="card-dashboard__content">
                 <h5>{{ task.task }}</h5>

@@ -1,41 +1,33 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, computed } from '@angular/core';
 import { Button } from "../../../../shared/components/button/button";
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard-agendamento-time',
-  imports: [Button],
+  standalone: true,
+  imports: [Button, FormsModule],
   templateUrl: './dashboard-agendamento-time.html',
   styleUrl: './dashboard-agendamento-time.scss',
 })
 export class DashboardAgendamentoTime {
   private readonly _dialogRef = inject(MatDialogRef);
-  public horarios = signal<string[]>([]);
-  public horarioSelecionado = signal<string>('');
 
-  constructor() {
-    this._gerarHorarios();
-  }
+  // Gera 00 até 23
+  public listaHoras = Array.from({ length: 24 }, (_, i) => i.toString().padStart(2, '0'));
 
-  private _gerarHorarios() {
-    const passo = 30;
-    const totalMinutosNoDia = 24 * 60;
+  // Gera 00 até 59
+  public listaMinutos = Array.from({ length: 60 }, (_, i) => i.toString().padStart(2, '0'));
 
-    for (let minutos = 0; minutos < totalMinutosNoDia; minutos += passo) {
-      const horas = Math.floor(minutos / 60);
-      const mins = minutos % 60;
+  public horaSelecionada = signal<string>('08');
+  public minutoSelecionado = signal<string>('00');
 
-      const horarioFormatado = `${horas.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}`;
-
-      this.horarios.update((prev) => [...prev, horarioFormatado]);
-    }
-  }
-
-  public selecionar(horario: string) {
-    this.horarioSelecionado.set(horario);
-  }
+  // O computed une os dois valores sempre que um deles muda
+  public horarioFormatado = computed(() =>
+    `${this.horaSelecionada()}:${this.minutoSelecionado()}`
+  );
 
   public salvarHorario() {
-    this._dialogRef.close(this.horarioSelecionado());
+    this._dialogRef.close(this.horarioFormatado());
   }
 }

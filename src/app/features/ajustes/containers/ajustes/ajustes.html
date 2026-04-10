@@ -3,17 +3,17 @@
 
   <div class="row w-100">
     <div class="col-md-5">
-      <p>&nbsp;</p>
+      <p class="text-muted mb-3">&nbsp;</p>
       <div class="card-dashboard" routerLink="perfil">
         <div class="card-dashboard__icon">
           <i class="fa-solid fa-user"></i>
         </div>
         <div class="card-dashboard__content">
-          <h5>João Silva</h5>
-          <p class="mb-0">jo.s@uol.com</p>
+          <h5>{{ profile()!.name }}</h5>
+          <p class="mb-0">{{ profile()!.email }}</p>
         </div>
       </div>
-      <p class="text-muted mt-3">CONTA</p>
+      <p class="text-muted my-3">CONTA</p>
       <div class="card-dashboard">
         <div class="card-dashboard__icon">
           <i class="fa-solid fa-lock"></i>
@@ -27,35 +27,27 @@
       </div>
     </div>
     <div class="col-md-5 offset-md-2">
-      <p class="text-muted">ACESSIBILIDADE</p>
-      <div class="card-dashboard">
+      <p class="text-muted mb-3">ACESSIBILIDADE</p>
+      <div class="card-dashboard" routerLink="letras" routerLinkActive="router-link-active">
         <div class="card-dashboard__icon">
           <i class="fa-solid fa-font"></i>
         </div>
         <div class="card-dashboard__content">
           <h5>Ajustar tamanho da letra</h5>
         </div>
-        <div
-          class="card-dashboard__actions"
-          routerLink="letras"
-          routerLinkActive="router-link-active"
-        >
+        <div class="card-dashboard__actions">
           <i class="fa-solid fa-angle-right"></i>
         </div>
       </div>
 
-      <div class="card-dashboard my-3">
+      <div class="card-dashboard my-3" routerLink="cores" routerLinkActive="router-link-active">
         <div class="card-dashboard__icon">
           <i class="fa-solid fa-circle-half-stroke"></i>
         </div>
         <div class="card-dashboard__content">
           <h5>Mudar Cores/Contrastes</h5>
         </div>
-        <div
-          class="card-dashboard__actions"
-          routerLink="cores"
-          routerLinkActive="router-link-active"
-        >
+        <div class="card-dashboard__actions">
           <i class="fa-solid fa-angle-right"></i>
         </div>
       </div>
