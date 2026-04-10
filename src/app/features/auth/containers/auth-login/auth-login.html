@@ -1,1 +1,27 @@
-<p>auth-login works!</p>
+<form [formGroup]="form">
+  <app-custom-stepper [isLinear]="true" (finalizeEmit)="logarUsuario()" [loading]="isLoggingIn()">
+    <cdk-step [stepControl]="form.controls.step1">
+      <div formGroupName="step1" class="w-100">
+        <app-input
+          label="Informe seu e-mail"
+          inputLabel="Digite seu e-mail"
+          type="email"
+          class="w-100"
+          formControlName="email"
+        />
+      </div>
+    </cdk-step>
+
+    <cdk-step [stepControl]="form.controls.step2">
+      <div formGroupName="step2" class="w-100">
+        <app-input
+          label="Informe sua senha"
+          inputLabel="Sua senha deve ser fácil de lembrar, mas difícil de adivinhar."
+          type="password"
+          class="w-100"
+          formControlName="password"
+        />
+      </div>
+    </cdk-step>
+  </app-custom-stepper>
+</form>

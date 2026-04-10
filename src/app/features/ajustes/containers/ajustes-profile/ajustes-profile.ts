@@ -23,7 +23,7 @@ export class AjustesProfile {
   public hideConfirmPassword = signal(true);
   public messageSuccess = signal('');
   public messageError = signal('');
-  public loadingProfile = this._profileService.loadingProfile;
+  public isUpdatingProfile = this._profileService.isUpdatingProfile;
 
   public perfilForm = new FormGroup(
     {
